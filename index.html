@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kedro Issues · Theme › Epic › Issues</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--sb:270px;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+body{font-family:var(--sans);background:#eef2f7;color:#1e293b;display:flex;min-height:100vh}
+#sb{width:var(--sb);background:#fff;border-right:1px solid #e2e8f0;position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:100}
+.sb-head{background:#0f172a;color:#fff;padding:16px 14px 12px;position:sticky;top:0;z-index:10}
+.sb-head h1{font-size:13.5px;font-weight:800}
+.sb-head p{font-size:11px;color:#94a3b8;margin-top:3px}
+.sb-srch{padding:8px 10px;border-bottom:1px solid #e2e8f0;position:sticky;top:60px;background:#fff;z-index:9}
+.sb-srch input{width:100%;padding:6px 9px;border:1px solid #cbd5e1;border-radius:6px;font-size:12px;outline:none;font-family:inherit}
+.sb-srch input:focus{border-color:#818cf8;box-shadow:0 0 0 2px #818cf820}
+.sb-lbl{font-size:10px;font-weight:700;text-transform:uppercase;color:#94a3b8;padding:11px 13px 3px;letter-spacing:.08em}
+.nav-link{display:flex;align-items:center;gap:7px;padding:7px 9px;margin:1px 5px;border-radius:6px;text-decoration:none;color:#334155;font-size:12px;border-left:3px solid transparent;transition:background .12s}
+.nav-link:hover{background:#f8fafc}
+.nav-link.active{background:#f1f5f9;font-weight:700;border-left-color:var(--c);color:var(--c)}
+.nav-icon{font-size:13px;flex-shrink:0}
+.nav-text{flex:1;line-height:1.3}
+.nav-badge{font-size:10px;font-weight:700;color:#fff;padding:1px 6px;border-radius:20px;flex-shrink:0}
+#sb::-webkit-scrollbar{width:4px}
+#sb::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:4px}
+#main{margin-left:var(--sb);flex:1;padding:26px 30px 80px;min-width:0}
+.hero{background:linear-gradient(135deg,#0f172a,#1a3a5c);color:#fff;border-radius:12px;padding:22px 26px;margin-bottom:24px;display:flex;gap:16px;align-items:center}
+.hero-logo{font-size:36px;flex-shrink:0}
+.hero h1{font-size:18px;font-weight:800}
+.hero p{font-size:12px;color:#94a3b8;margin-top:3px}
+.hero-stats{display:flex;gap:10px;margin-top:11px;flex-wrap:wrap}
+.stat{background:rgba(255,255,255,.09);border-radius:7px;padding:6px 13px;text-align:center}
+.stat-n{font-size:17px;font-weight:800;color:#38bdf8}
+.stat-l{font-size:10px;color:#94a3b8}
+.legend{display:inline-flex;align-items:center;gap:10px;font-size:12px;color:#475569;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 14px;margin-bottom:24px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.leg-item{display:flex;align-items:center;gap:5px;font-weight:600}
+.leg-dot{width:12px;height:12px;border-radius:3px}
+.leg-sep{color:#cbd5e1;font-size:16px}
+#srch-info{font-size:12px;color:#64748b;min-height:18px;margin-bottom:14px}
+.theme-section{margin-bottom:48px}
+.theme-header{border-radius:12px;padding:16px 20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.theme-header-top{display:flex;gap:14px;align-items:flex-start}
+.theme-icon{font-size:28px;flex-shrink:0;padding-top:2px}
+.theme-title-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:5px}
+.theme-title{font-size:17px;font-weight:800;color:#0f172a}
+.theme-count-badge{font-size:11px;font-weight:700;color:#fff;padding:2px 9px;border-radius:20px}
+.theme-meta-pill{font-size:11px;font-weight:600;padding:2px 9px;border-radius:20px}
+.theme-desc{font-size:12.5px;color:#475569;line-height:1.5}
+.theme-body{display:flex;flex-direction:column;gap:16px}
+.epic-block{background:#fff;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.epic-header-bar{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid rgba(0,0,0,.07)}
+.epic-header-left{display:flex;align-items:center;gap:10px}
+.epic-pill{font-size:10px;font-weight:800;color:#fff;padding:3px 8px;border-radius:5px;letter-spacing:.05em;white-space:nowrap}
+.epic-name{font-size:14px;font-weight:700;color:#1e293b}
+.epic-issue-count{font-size:12px;font-weight:700;white-space:nowrap}
+.epic-desc-text{font-size:12px;color:#64748b;padding:8px 16px 10px;border-bottom:1px solid #f0f4f8;line-height:1.55;background:#fafbfc}
+.issues-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px;padding:14px 16px;background:#f8fafc}
+.issue-card{background:#fff;border-radius:8px;padding:11px 13px;box-shadow:0 1px 3px rgba(0,0,0,.07);transition:transform .12s,box-shadow .12s;cursor:pointer}
+.issue-card:hover{transform:translateY(-2px);box-shadow:0 5px 16px rgba(0,0,0,.11)}
+.issue-card[hidden]{display:none!important}
+.card-top{display:flex;align-items:flex-start;gap:7px;margin-bottom:6px}
+.issue-num{font-size:11px;font-weight:700;font-family:monospace;text-decoration:none;white-space:nowrap;flex-shrink:0;padding-top:2px}
+.issue-num:hover{text-decoration:underline}
+.issue-title{font-size:12.5px;font-weight:600;color:#1e293b;line-height:1.4}
+.chips{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:6px}
+.chip{font-size:10px;background:#f1f5f9;color:#475569;padding:1px 6px;border-radius:10px;border:1px solid #e2e8f0}
+.reason{font-size:11px;color:#64748b;background:#f8fafc;border-radius:6px;padding:6px 8px;display:flex;gap:5px;align-items:flex-start;border:1px solid #e8edf2;line-height:1.5}
+</style>
+</head>
+<body>
+<nav id="sb">
+  <div class="sb-head"><h1>🔷 Kedro Open Issues</h1><p>Theme › Epic › Issues</p></div>
+  <div class="sb-srch"><input type="text" id="search" placeholder="🔍  Search issues…" oninput="filterCards(this.value)"></div>
+  <div class="sb-lbl">Themes</div>
+  <a class="nav-link" href="#epic_docs" style="--c:#0284c7">
+  <span class="nav-icon">📄</span>
+  <span class="nav-text">Documentation &amp; Onboarding</span>
+  <span class="nav-badge" style="background:#0284c7">30</span>
+</a><a class="nav-link" href="#epic_pipeline" style="--c:#7c3aed">
+  <span class="nav-icon">🔗</span>
+  <span class="nav-text">Pipeline &amp; Node API</span>
+  <span class="nav-badge" style="background:#7c3aed">24</span>
+</a><a class="nav-link" href="#epic_catalog" style="--c:#16a34a">
+  <span class="nav-icon">🗄️</span>
+  <span class="nav-text">Data Catalog &amp; Datasets</span>
+  <span class="nav-badge" style="background:#16a34a">23</span>
+</a><a class="nav-link" href="#epic_session" style="--c:#dc2626">
+  <span class="nav-icon">🚀</span>
+  <span class="nav-text">KedroSession &amp; Execution</span>
+  <span class="nav-badge" style="background:#dc2626">18</span>
+</a><a class="nav-link" href="#epic_config" style="--c:#ca8a04">
+  <span class="nav-icon">⚙️</span>
+  <span class="nav-text">Configuration Management</span>
+  <span class="nav-badge" style="background:#ca8a04">9</span>
+</a><a class="nav-link" href="#epic_cli" style="--c:#15803d">
+  <span class="nav-icon">💻</span>
+  <span class="nav-text">CLI &amp; Developer Experience</span>
+  <span class="nav-badge" style="background:#15803d">18</span>
+</a><a class="nav-link" href="#epic_ai" style="--c:#0369a1">
+  <span class="nav-icon">🤖</span>
+  <span class="nav-text">AI, LLM &amp; Agentic Workflows</span>
+  <span class="nav-badge" style="background:#0369a1">9</span>
+</a><a class="nav-link" href="#epic_deploy" style="--c:#c2410c">
+  <span class="nav-icon">☁️</span>
+  <span class="nav-text">Deployment</span>
+  <span class="nav-badge" style="background:#c2410c">6</span>
+</a><a class="nav-link" href="#epic_observability" style="--c:#6d28d9">
+  <span class="nav-icon">📊</span>
+  <span class="nav-text">Logging, Observability &amp; Quality</span>
+  <span class="nav-badge" style="background:#6d28d9">9</span>
+</a><a class="nav-link" href="#epic_devops" style="--c:#475569">
+  <span class="nav-icon">🛠️</span>
+  <span class="nav-text">DevOps &amp; Community</span>
+  <span class="nav-badge" style="background:#475569">5</span>
+</a>
+</nav>
+<main id="main">
+  <div class="hero">
+    <div class="hero-logo">🔷</div>
+    <div>
+      <h1>Kedro Open Issues — Theme › Epic › Issues</h1>
+      <p>kedro-org/kedro · 151 open issues · Fetched 30 Jun 2026</p>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-n">151</div><div class="stat-l">Issues</div></div>
+        <div class="stat"><div class="stat-n">10</div><div class="stat-l">Themes</div></div>
+        <div class="stat"><div class="stat-n">18</div><div class="stat-l">Epics</div></div>
+        <div class="stat"><div class="stat-n">4</div><div class="stat-l">Flat themes</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:#0284c7"></div>Theme</div>
+    <span class="leg-sep">›</span>
+    <div class="leg-item"><div class="leg-dot" style="background:#334155"></div>Epic</div>
+    <span class="leg-sep">›</span>
+    <div class="leg-item"><div class="leg-dot" style="background:#e2e8f0;border:1px solid #cbd5e1"></div>Issues (with 💡 reasoning)</div>
+  </div>
+  <div id="srch-info"></div>
+  <section id="epic_docs" class="theme-section">
+  <div class="theme-header" style="border-left:6px solid #0284c7; background:#e0f2fe">
+    <div class="theme-header-top">
+      <span class="theme-icon">📄</span>
+      <div>
+        <div class="theme-title-row">
+          <h2 class="theme-title">Documentation &amp; Onboarding</h2>
+          <span class="theme-count-badge" style="background:#0284c7">30 issues</span>
+          <span class="theme-meta-pill" style="background:#0284c720;color:#0284c7;border:1px solid #0284c740">3 epics</span>
+        </div>
+        <p class="theme-desc">All work to restructure, improve, and grow Kedro&#x27;s documentation — from the Diátaxis migration to quick-start guides and component-level reference pages.</p>
+      </div>
+    </div>
+  </div>
+  <div class="theme-body"><div class="epic-block" style="border-top:3px solid #0284c7">
+  <div class="epic-header-bar" style="background:#e0f2fe">
+    <div class="epic-header-left">
+      <span class="epic-pill" style="background:#0284c7">EPIC 1 of 3</span>
+      <span class="epic-name">Diátaxis Restructure &amp; Zensical Migration</span>
+    </div>
+    <span class="epic-issue-count" style="color:#0284c7">6 issues</span>
+  </div>
+  <p class="epic-desc-text">Mechanical migration of existing docs to the Diátaxis information architecture.</p>
+  <div class="issues-grid"><div class="issue-card" data-search="documentation ia overhaul: transition kedro docs to diátaxis structure #5395 full documentation ia overhaul to diátaxis structure." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5395" target="_blank" style="color:#0284c7">#5395</a>
+    <span class="issue-title">Documentation IA overhaul: Transition Kedro docs to Diátaxis structure</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>Full documentation IA overhaul to Diátaxis structure.</span></div>
+</div><div class="issue-card" data-search="migrate data catalog content to diátaxis #5586 migrate data catalog docs specifically to diátaxis format." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5586" target="_blank" style="color:#0284c7">#5586</a>
+    <span class="issue-title">Migrate Data Catalog content to Diátaxis</span>
+  </div>
+  <div class="chips"><span class="chip">Component: Documentation 📄</span></div>
+  <div class="reason"><span>💡</span><span>Migrate Data Catalog docs specifically to Diátaxis format.</span></div>
+</div><div class="issue-card" data-search="[docs] migrate build section of docs to diataxis #5626 migrate the &#x27;build&#x27; section to diátaxis structure." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5626" target="_blank" style="color:#0284c7">#5626</a>
+    <span class="issue-title">[Docs] Migrate Build section of docs to Diataxis</span>
+  </div>
+  <div class="chips"><span class="chip">Component: Documentation 📄</span></div>
+  <div class="reason"><span>💡</span><span>Migrate the &#x27;Build&#x27; section to Diátaxis structure.</span></div>
+</div><div class="issue-card" data-search="[docs] apply rtd redirects once diataxis reorg is complete #5621 apply read the docs redirects after diátaxis reorg — a docs infrastructure task." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5621" target="_blank" style="color:#0284c7">#5621</a>
+    <span class="issue-title">[Docs] Apply RTD redirects once Diataxis reorg is complete</span>
+  </div>
+  <div class="chips"><span class="chip">Component: Documentation 📄</span></div>
+  <div class="reason"><span>💡</span><span>Apply Read the Docs redirects after Diátaxis reorg — a docs infrastructure task.</span></div>
+</div><div class="issue-card" data-search="migrate from mkdocs to zensical #5267 migration of the documentation site from mkdocs to zensical — a docs infrastructure issue." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5267" target="_blank" style="color:#0284c7">#5267</a>
+    <span class="issue-title">Migrate from MKDocs to Zensical</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>Migration of the documentation site from MkDocs to Zensical — a docs infrastructure issue.</span></div>
+</div><div class="issue-card" data-search="enhance kedro docs with algolia search functionality in mkdocs setup #4756 requests algolia search in mkdocs — a docs discoverability/ux improvement." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/4756" target="_blank" style="color:#0284c7">#4756</a>
+    <span class="issue-title">Enhance Kedro Docs with Algolia Search Functionality in MkDocs Setup</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>Requests Algolia search in MkDocs — a docs discoverability/UX improvement.</span></div>
+</div></div>
+</div><div class="epic-block" style="border-top:3px solid #0284c7">
+  <div class="epic-header-bar" style="background:#e0f2fe">
+    <div class="epic-header-left">
+      <span class="epic-pill" style="background:#0284c7">EPIC 2 of 3</span>
+      <span class="epic-name">Onboarding &amp; Quick-Start</span>
+    </div>
+    <span class="epic-issue-count" style="color:#0284c7">7 issues</span>
+  </div>
+  <p class="epic-desc-text">Reduce friction for new users: quick-start guides, learning curve improvements, simplified language, and visual hierarchy.</p>
+  <div class="issues-grid"><div class="issue-card" data-search="flatten the learning curve of kedro #4892 explicitly about flattening the kedro learning curve — a strategic onboarding issue." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/4892" target="_blank" style="color:#0284c7">#4892</a>
+    <span class="issue-title">Flatten the learning curve of Kedro</span>
+  </div>
+  <div class="chips"><span class="chip">Design: Research</span></div>
+  <div class="reason"><span>💡</span><span>Explicitly about flattening the Kedro learning curve — a strategic onboarding issue.</span></div>
+</div><div class="issue-card" data-search="design a quick-start guide for kedro onboarding #5614 design a quick-start onboarding guide — a direct onboarding content request." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5614" target="_blank" style="color:#0284c7">#5614</a>
+    <span class="issue-title">Design a quick-start guide for Kedro onboarding</span>
+  </div>
+  <div class="chips"><span class="chip">Component: Documentation 📄</span><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Design a quick-start onboarding guide — a direct onboarding content request.</span></div>
+</div><div class="issue-card" data-search="[doc] streamline and simplify kedro doc for smoother onboarding #5591 streamline and simplify overall docs for smoother onboarding." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5591" target="_blank" style="color:#0284c7">#5591</a>
+    <span class="issue-title">[Doc] Streamline and simplify Kedro doc for smoother onboarding</span>
+  </div>
+  <div class="chips"><span class="chip">Component: Documentation 📄</span></div>
+  <div class="reason"><span>💡</span><span>Streamline and simplify overall docs for smoother onboarding.</span></div>
+</div><div class="issue-card" data-search="visually distinguish stable from unreleased documentation #2823 asks for visual cues to separate stable from unreleased docs — an onboarding/content-clarity concern." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/2823" target="_blank" style="color:#0284c7">#2823</a>
+    <span class="issue-title">Visually distinguish stable from unreleased documentation</span>
+  </div>
+  <div class="chips"><span class="chip">Component: Documentation 📄</span><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Asks for visual cues to separate stable from unreleased docs — an onboarding/content-clarity concern.</span></div>
+</div><div class="issue-card" data-search="improve visual hierarchy of cli command headers in new documentation structure #4977 about improving visual hierarchy in cli command headers inside the new docs structure." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/4977" target="_blank" style="color:#0284c7">#4977</a>
+    <span class="issue-title">Improve visual hierarchy of CLI command headers in new documentation structure</span>
+  </div>
+  <div class="chips"><span class="chip">Component: Documentation 📄</span><span class="chip">Design: Visual Design</span></div>
+  <div class="reason"><span>💡</span><span>About improving visual hierarchy in CLI command headers inside the new docs structure.</span></div>
+</div><div class="issue-card" data-search="use &quot;data engineering and data science&quot; across the docs #5249 consistency of terminology (&#x27;data engineering and data science&#x27;) throughout docs." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5249" target="_blank" style="color:#0284c7">#5249</a>
+    <span class="issue-title">Use &quot;data engineering and data science&quot; across the docs</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>Consistency of terminology (&#x27;data engineering and data science&#x27;) throughout docs.</span></div>
+</div><div class="issue-card" data-search="consolidate existing guides for common and typical kedro tasks/workflows #5059 consolidate guides for common kedro tasks — interactive/workflow documentation." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5059" target="_blank" style="color:#0284c7">#5059</a>
+    <span class="issue-title">Consolidate existing guides for common and typical Kedro tasks/workflows</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Consolidate guides for common Kedro tasks — interactive/workflow documentation.</span></div>
+</div></div>
+</div><div class="epic-block" style="border-top:3px solid #0284c7">
+  <div class="epic-header-bar" style="background:#e0f2fe">
+    <div class="epic-header-left">
+      <span class="epic-pill" style="background:#0284c7">EPIC 3 of 3</span>
+      <span class="epic-name">Component &amp; Reference Docs</span>
+    </div>
+    <span class="epic-issue-count" style="color:#0284c7">17 issues</span>
+  </div>
+  <p class="epic-desc-text">Targeted improvements to specific documentation pages — datasets, deployment, Dask, PySpark, credentials, blog, and custom code.</p>
+  <div class="issues-grid"><div class="issue-card" data-search="create external documentation plugin #2075 requests a plugin to generate/publish external docs — a pure documentation tooling concern." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/2075" target="_blank" style="color:#0284c7">#2075</a>
+    <span class="issue-title">Create external documentation plugin</span>
+  </div>
+  <div class="chips"><span class="chip">Help Wanted :pray:</span><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Requests a plugin to generate/publish external docs — a pure documentation tooling concern.</span></div>
+</div><div class="issue-card" data-search="rectify &quot;modular pipelines&quot; terminology #2723 terminology inconsistency in how &#x27;modular pipelines&#x27; is documented; purely a docs-quality issue." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/2723" target="_blank" style="color:#0284c7">#2723</a>
+    <span class="issue-title">Rectify &quot;modular pipelines&quot; terminology</span>
+  </div>
+  <div class="chips"><span class="chip">Component: Documentation 📄</span><span class="chip">Type: Parent Issue</span></div>
+  <div class="reason"><span>💡</span><span>Terminology inconsistency in how &#x27;modular pipelines&#x27; is documented; purely a docs-quality issue.</span></div>
+</div><div class="issue-card" data-search="[parent] improve documentation section that covers &quot;nodes &amp; pipelines&quot; #3200 parent issue tracking improvements to the nodes &amp; pipelines docs section." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3200" target="_blank" style="color:#0284c7">#3200</a>
+    <span class="issue-title">[Parent] Improve documentation section that covers &quot;Nodes &amp; pipelines&quot;</span>
+  </div>
+  <div class="chips"><span class="chip">Component: Documentation 📄</span><span class="chip">Type: Parent Issue</span></div>
+  <div class="reason"><span>💡</span><span>Parent issue tracking improvements to the Nodes &amp; Pipelines docs section.</span></div>
+</div><div class="issue-card" data-search="[parent] improve documentation section that covers &quot;extend kedro&quot; #3202 parent issue tracking improvements to the &#x27;extend kedro&#x27; docs section." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3202" target="_blank" style="color:#0284c7">#3202</a>
+    <span class="issue-title">[Parent] Improve documentation section that covers &quot;Extend Kedro&quot;</span>
+  </div>
+  <div class="chips"><span class="chip">Component: Documentation 📄</span><span class="chip">Type: Parent Issue</span></div>
+  <div class="reason"><span>💡</span><span>Parent issue tracking improvements to the &#x27;Extend Kedro&#x27; docs section.</span></div>
+</div><div class="issue-card" data-search="describe how to use custom code with kedro #3418 requests better guidance on integrating custom code — a content gap in the docs." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3418" target="_blank" style="color:#0284c7">#3418</a>
+    <span class="issue-title">Describe how to use custom code with Kedro</span>
+  </div>
+  <div class="chips"><span class="chip">Component: Documentation 📄</span><span class="chip">Community</span></div>
+  <div class="reason"><span>💡</span><span>Requests better guidance on integrating custom code — a content gap in the docs.</span></div>
+</div><div class="issue-card" data-search="[spike] - add a feature to add new tools to the existing kedro project #3689 asks how to add new tools to an existing project — a gap in how-to documentation." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3689" target="_blank" style="color:#0284c7">#3689</a>
+    <span class="issue-title">[Spike] - Add a feature to add new tools to the existing kedro project</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Asks how to add new tools to an existing project — a gap in how-to documentation.</span></div>
+</div><div class="issue-card" data-search="expand paramenter dictionaries in node functions declarations #3818 wants docs to show expanded parameter dictionaries in node function signatures." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3818" target="_blank" style="color:#0284c7">#3818</a>
+    <span class="issue-title">Expand paramenter dictionaries in node functions declarations</span>
+  </div>
+  <div class="chips"><span class="chip">Component: Documentation 📄</span></div>
+  <div class="reason"><span>💡</span><span>Wants docs to show expanded parameter dictionaries in node function signatures.</span></div>
+</div><div class="issue-card" data-search="ability to kedro run --version &#x27;label&#x27; #4028 requests a --version label flag for kedro run; the issue body focuses on documenting versioning conventions." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/4028" target="_blank" style="color:#0284c7">#4028</a>
+    <span class="issue-title">ability to kedro run --version &#x27;label&#x27;</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Requests a --version label flag for kedro run; the issue body focuses on documenting versioning conventions.</span></div>
+</div><div class="issue-card" data-search="enhance documentation with tutorials and working examples of how to run sql queries with ibis #4189 asks for docs/tutorials covering sql query workflows in kedro." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/4189" target="_blank" style="color:#0284c7">#4189</a>
+    <span class="issue-title">Enhance documentation with tutorials and working examples of how to run SQL queries with Ibis</span>
+  </div>
+  <div class="chips"><span class="chip">Help Wanted :pray:</span></div>
+  <div class="reason"><span>💡</span><span>Asks for docs/tutorials covering SQL query workflows in Kedro.</span></div>
+</div><div class="issue-card" data-search="improve documentation for pyspark setup (&#x27;kedro run&#x27; cant resolve path on starter project with tool pyspark enabled) #4366 docs for pyspark path setup are incorrect/incomplete — a documentation accuracy issue." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/4366" target="_blank" style="color:#0284c7">#4366</a>
+    <span class="issue-title">Improve documentation for pyspark setup (&#x27;kedro run&#x27; cant resolve path on starter project with tool pyspark enabled)</span>
+  </div>
+  <div class="chips"><span class="chip">Component: Documentation 📄</span></div>
+  <div class="reason"><span>💡</span><span>Docs for PySpark path setup are incorrect/incomplete — a documentation accuracy issue.</span></div>
+</div><div class="issue-card" data-search="add pip to dev requirements #4713 requests pip to be added to dev requirements — primarily a contributor onboarding concern." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/4713" target="_blank" style="color:#0284c7">#4713</a>
+    <span class="issue-title">Add pip to dev requirements</span>
+  </div>
+  <div class="chips"><span class="chip">Community</span></div>
+  <div class="reason"><span>💡</span><span>Requests pip to be added to dev requirements — primarily a contributor onboarding concern.</span></div>
+</div><div class="issue-card" data-search="re-record `slice_pipeline_kedro_viz.gif` #4773 asks to re-record an outdated gif in the docs." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/4773" target="_blank" style="color:#0284c7">#4773</a>
+    <span class="issue-title">Re-record `slice_pipeline_kedro_viz.gif`</span>
+  </div>
+  <div class="chips"><span class="chip">Component: Documentation 📄</span></div>
+  <div class="reason"><span>💡</span><span>Asks to re-record an outdated GIF in the docs.</span></div>
+</div><div class="issue-card" data-search="code examples on deploy/dask not working #5233 code examples on the deploy/dask page are broken — a documentation accuracy issue." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5233" target="_blank" style="color:#0284c7">#5233</a>
+    <span class="issue-title">Code examples on Deploy/Dask not working</span>
+  </div>
+  <div class="chips"><span class="chip">Component: Documentation 📄</span></div>
+  <div class="reason"><span>💡</span><span>Code examples on the Deploy/Dask page are broken — a documentation accuracy issue.</span></div>
+</div><div class="issue-card" data-search="feature request: rag / llm pipeline debugging tutorial using 16-problem problemmap #5396 requests a rag/llm debugging tutorial — a new-topic documentation gap." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5396" target="_blank" style="color:#0284c7">#5396</a>
+    <span class="issue-title">Feature request: RAG / LLM pipeline debugging tutorial using 16-problem ProblemMap</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>Requests a RAG/LLM debugging tutorial — a new-topic documentation gap.</span></div>
+</div><div class="issue-card" data-search="improve deployment docs to a &quot;theory-based&quot; framework with aws reference #5543 improve deployment docs with a theory-based framework and aws reference guide." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5543" target="_blank" style="color:#0284c7">#5543</a>
+    <span class="issue-title">Improve deployment docs to a &quot;theory-based&quot; framework with AWS reference</span>
+  </div>
+  <div class="chips"><span class="chip">Component: Documentation 📄</span></div>
+  <div class="reason"><span>💡</span><span>Improve deployment docs with a theory-based framework and AWS reference guide.</span></div>
+</div><div class="issue-card" data-search="document how to add docs with mkdocs when the docs tool is not selected #5603 document how to add docs when the docs tool wasn&#x27;t selected at project creation." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5603" target="_blank" style="color:#0284c7">#5603</a>
+    <span class="issue-title">Document how to add docs with MkDocs when the docs tool is not selected</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>Document how to add docs when the docs tool wasn&#x27;t selected at project creation.</span></div>
+</div><div class="issue-card" data-search="fix the `docs` tool so generated sphinx docs build correctly #5592 fix the docs build tool so sphinx-generated docs compile correctly." style="border-left:4px solid #0284c7">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5592" target="_blank" style="color:#0284c7">#5592</a>
+    <span class="issue-title">Fix the `docs` tool so generated Sphinx docs build correctly</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>Fix the docs build tool so Sphinx-generated docs compile correctly.</span></div>
+</div></div>
+</div></div>
+</section><section id="epic_pipeline" class="theme-section">
+  <div class="theme-header" style="border-left:6px solid #7c3aed; background:#ede9fe">
+    <div class="theme-header-top">
+      <span class="theme-icon">🔗</span>
+      <div>
+        <div class="theme-title-row">
+          <h2 class="theme-title">Pipeline &amp; Node API</h2>
+          <span class="theme-count-badge" style="background:#7c3aed">24 issues</span>
+          <span class="theme-meta-pill" style="background:#7c3aed20;color:#7c3aed;border:1px solid #7c3aed40">4 epics</span>
+        </div>
+        <p class="theme-desc">Improvements to how pipelines and nodes are authored, composed, discovered, and run — covering namespaces, the registry, node ergonomics, and interactive tooling.</p>
+      </div>
+    </div>
+  </div>
+  <div class="theme-body"><div class="epic-block" style="border-top:3px solid #7c3aed">
+  <div class="epic-header-bar" style="background:#ede9fe">
+    <div class="epic-header-left">
+      <span class="epic-pill" style="background:#7c3aed">EPIC 1 of 4</span>
+      <span class="epic-name">Namespaces &amp; Composition</span>
+    </div>
+    <span class="epic-issue-count" style="color:#7c3aed">6 issues</span>
+  </div>
+  <p class="epic-desc-text">Bugs and features related to namespaced pipelines, parameter injection, and how pipelines are combined.</p>
+  <div class="issues-grid"><div class="issue-card" data-search="cannot override packed `*args` or `**kwargs` to an instance of a modular pipeline using the `pipeline()` wrapper  #1228 overriding *args/**kwargs in modular pipelines — a core node api design limitation." style="border-left:4px solid #7c3aed">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/1228" target="_blank" style="color:#7c3aed">#1228</a>
+    <span class="issue-title">Cannot override packed `*args` or `**kwargs` to an instance of a modular pipeline using the `pipeline()` wrapper </span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Overriding *args/**kwargs in modular pipelines — a core Node API design limitation.</span></div>
+</div><div class="issue-card" data-search="namespaced pipelines interpreting all arguments as datasets #2646 namespaced pipelines incorrectly treating all args as datasets — pipeline namespace bug." style="border-left:4px solid #7c3aed">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/2646" target="_blank" style="color:#7c3aed">#2646</a>
+    <span class="issue-title">Namespaced pipelines interpreting all arguments as datasets</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>Namespaced pipelines incorrectly treating all args as datasets — pipeline namespace bug.</span></div>
+</div><div class="issue-card" data-search="namespaced nodes #3679 namespaced nodes — pipeline namespace api feature request." style="border-left:4px solid #7c3aed">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3679" target="_blank" style="color:#7c3aed">#3679</a>
+    <span class="issue-title">Namespaced Nodes</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>Namespaced nodes — pipeline namespace API feature request.</span></div>
+</div><div class="issue-card" data-search="decide new name for &quot;reused pipelines with namespaces&quot; #4016 decide naming for &#x27;reused pipelines with namespaces&#x27; — pipeline terminology/api design." style="border-left:4px solid #7c3aed">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/4016" target="_blank" style="color:#7c3aed">#4016</a>
+    <span class="issue-title">Decide new name for &quot;reused pipelines with namespaces&quot;</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Decide naming for &#x27;reused pipelines with namespaces&#x27; — pipeline terminology/API design.</span></div>
+</div><div class="issue-card" data-search="dict unpacking with &quot;**params:foo.bar&quot; in `node(inputs=)` #2749 dict unpacking with **params:foo.bar in node inputs — pipeline parameter injection feature." style="border-left:4px solid #7c3aed">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/2749" target="_blank" style="color:#7c3aed">#2749</a>
+    <span class="issue-title">dict unpacking with &quot;**params:foo.bar&quot; in `node(inputs=)`</span>
+  </div>
+  <div class="chips"><span class="chip">Help Wanted :pray:</span><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Dict unpacking with **params:foo.bar in node inputs — pipeline parameter injection feature.</span></div>
+</div><div class="issue-card" data-search="add `before/after_pipelines_registered` hook or  `before/after_pipeline_filtered` #3000 add before/after_pipelines_registered hooks — pipeline lifecycle hook api." style="border-left:4px solid #7c3aed">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3000" target="_blank" style="color:#7c3aed">#3000</a>
+    <span class="issue-title">Add `before/after_pipelines_registered` hook OR  `before/after_pipeline_filtered`</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Add before/after_pipelines_registered hooks — pipeline lifecycle hook API.</span></div>
+</div></div>
+</div><div class="epic-block" style="border-top:3px solid #7c3aed">
+  <div class="epic-header-bar" style="background:#ede9fe">
+    <div class="epic-header-left">
+      <span class="epic-pill" style="background:#7c3aed">EPIC 2 of 4</span>
+      <span class="epic-name">Registry &amp; Discovery</span>
+    </div>
+    <span class="epic-issue-count" style="color:#7c3aed">5 issues</span>
+  </div>
+  <p class="epic-desc-text">Refactoring pipeline discovery into an explicit registry, improving understandability, and adding filtering controls.</p>
+  <div class="issues-grid"><div class="issue-card" data-search="the pipeline registry is difficult to understand #3233 the pipeline registry is hard to understand — pipeline discovery/api ergonomics." style="border-left:4px solid #7c3aed">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3233" target="_blank" style="color:#7c3aed">#3233</a>
+    <span class="issue-title">The pipeline registry is difficult to understand</span>
+  </div>
+  <div class="chips"><span class="chip">Component: Documentation 📄</span></div>
+  <div class="reason"><span>💡</span><span>The pipeline registry is hard to understand — pipeline discovery/API ergonomics.</span></div>
+</div><div class="issue-card" data-search="spin off pipeline inspection to separate package #4363 spin off pipeline inspection to a separate package — pipeline api modularisation." style="border-left:4px solid #7c3aed">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/4363" target="_blank" style="color:#7c3aed">#4363</a>
+    <span class="issue-title">Spin off pipeline inspection to separate package</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Spin off pipeline inspection to a separate package — pipeline API modularisation.</span></div>
+</div><div class="issue-card" data-search="[spike] refactor kedro pipeline discovery into an explicit registry architecture #5550 refactor pipeline discovery into explicit registry — pipeline registry architecture." style="border-left:4px solid #7c3aed">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5550" target="_blank" style="color:#7c3aed">#5550</a>
+    <span class="issue-title">[Spike] Refactor Kedro Pipeline Discovery into an Explicit Registry Architecture</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Refactor pipeline discovery into explicit registry — pipeline registry architecture.</span></div>
+</div><div class="issue-card" data-search="add exclude_pipelines parameter to find_pipelines #5582 add exclude_pipelines to find_pipelines — pipeline registry api feature." style="border-left:4px solid #7c3aed">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5582" target="_blank" style="color:#7c3aed">#5582</a>
+    <span class="issue-title">Add exclude_pipelines parameter to find_pipelines</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Add exclude_pipelines to find_pipelines — pipeline registry API feature.</span></div>
+</div><div class="issue-card" data-search="investigate best way to fix and fix mypy failure on `pipeline_registry.py` in default template #2526 mypy failures in pipeline_registry.py — pipeline type-safety and api correctness." style="border-left:4px solid #7c3aed">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/2526" target="_blank" style="color:#7c3aed">#2526</a>
+    <span class="issue-title">Investigate best way to fix and fix MyPy failure on `pipeline_registry.py` in default template</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>MyPy failures in pipeline_registry.py — pipeline type-safety and API correctness.</span></div>
+</div></div>
+</div><div class="epic-block" style="border-top:3px solid #7c3aed">
+  <div class="epic-header-bar" style="background:#ede9fe">
+    <div class="epic-header-left">
+      <span class="epic-pill" style="background:#7c3aed">EPIC 3 of 4</span>
+      <span class="epic-name">Node API Ergonomics</span>
+    </div>
+    <span class="epic-issue-count" style="color:#7c3aed">8 issues</span>
+  </div>
+  <p class="epic-desc-text">Making nodes easier to author — skipping, decorator syntax, error messages, dependency management, and consistent inputs/outputs.</p>
+  <div class="issues-grid"><div class="issue-card" data-search="make `node` to accept input/outputs in a consistent manner #2408 make node() accept inputs/outputs consistently — node api ergonomics." style="border-left:4px solid #7c3aed">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/2408" target="_blank" style="color:#7c3aed">#2408</a>
+    <span class="issue-title">Make `node` to accept input/outputs in a consistent manner</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Make node() accept inputs/outputs consistently — Node API ergonomics.</span></div>
+</div><div class="issue-card" data-search="skip node at runtime #2410 skip a node at runtime — a pipeline execution control feature." style="border-left:4px solid #7c3aed">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/2410" target="_blank" style="color:#7c3aed">#2410</a>
+    <span class="issue-title">Skip node at runtime</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Skip a node at runtime — a pipeline execution control feature.</span></div>
+</div><div class="issue-card" data-search="spike: optional `@node` decorator to reduce kedro boilerplate #5360 optional @node decorator to reduce boilerplate — pipeline/node api ergonomics." style="border-left:4px solid #7c3aed">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5360" target="_blank" style="color:#7c3aed">#5360</a>
+    <span class="issue-title">Spike: Optional `@node` decorator to reduce Kedro boilerplate</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Optional @node decorator to reduce boilerplate — pipeline/node API ergonomics.</span></div>
+</div><div class="issue-card" data-search="better manage nodes dependencies when nodes do not share a dataset #5201 better manage node dependencies without shared datasets — pipeline graph api." style="border-left:4px solid #7c3aed">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5201" target="_blank" style="color:#7c3aed">#5201</a>
+    <span class="issue-title">Better manage nodes dependencies when nodes do not share a dataset</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Better manage node dependencies without shared datasets — pipeline graph API.</span></div>
+</div><div class="issue-card" data-search="improve error message in `pipelineerror` raised within `_validate_datasets_exist()` #3953 improve pipelineerror error message — pipeline error handling/api quality." style="border-left:4px solid #7c3aed">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3953" target="_blank" style="color:#7c3aed">#3953</a>
+    <span class="issue-title">Improve error message in `PipelineError` raised within `_validate_datasets_exist()`</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span><span class="chip">Hacktoberfest</span><span class="chip">OS Sprint</span></div>
+  <div class="reason"><span>💡</span><span>Improve PipelineError error message — pipeline error handling/API quality.</span></div>
+</div><div class="issue-card" data-search="rich add newline to long log message and it cannot be copy and paste directly into terminal #3276 rich log formatting breaks copy-paste of long messages — pipeline log/output issue." style="border-left:4px solid #7c3aed">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3276" target="_blank" style="color:#7c3aed">#3276</a>
+    <span class="issue-title">Rich add newline to long log message and it cannot be copy and paste directly into terminal</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>Rich log formatting breaks copy-paste of long messages — pipeline log/output issue.</span></div>
+</div><div class="issue-card" data-search="research pain points of kedro for data engineering pipelines #3578 research pain points for data engineering pipelines — pipeline api user research." style="border-left:4px solid #7c3aed">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3578" target="_blank" style="color:#7c3aed">#3578</a>
+    <span class="issue-title">Research pain points of Kedro for data engineering pipelines</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>Research pain points for data engineering pipelines — pipeline API user research.</span></div>
+</div><div class="issue-card" data-search="flexible node selection in `kedro run` command line syntax #3949 flexible node selection syntax in kedro run — pipeline filtering api." style="border-left:4px solid #7c3aed">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3949" target="_blank" style="color:#7c3aed">#3949</a>
+    <span class="issue-title">Flexible node selection in `kedro run` command line syntax</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Flexible node selection syntax in kedro run — pipeline filtering API.</span></div>
+</div></div>
+</div><div class="epic-block" style="border-top:3px solid #7c3aed">
+  <div class="epic-header-bar" style="background:#ede9fe">
+    <div class="epic-header-left">
+      <span class="epic-pill" style="background:#7c3aed">EPIC 4 of 4</span>
+      <span class="epic-name">Pipeline Tooling &amp; UI</span>
+    </div>
+    <span class="epic-issue-count" style="color:#7c3aed">5 issues</span>
+  </div>
+  <p class="epic-desc-text">Higher-level tooling for building and working with pipelines — GUI builder, interactive UI roadmap, dlt integration, dependency reduction.</p>
+  <div class="issues-grid"><div class="issue-card" data-search="gui for creating and editing pipelines #5072 gui for creating and editing pipelines — pipeline builder ui." style="border-left:4px solid #7c3aed">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5072" target="_blank" style="color:#7c3aed">#5072</a>
+    <span class="issue-title">GUI for Creating and Editing Pipelines</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span><span class="chip">Design: Research</span><span class="chip">Design: UX</span><span class="chip">Design: Visual Design</span></div>
+  <div class="reason"><span>💡</span><span>GUI for creating and editing pipelines — pipeline builder UI.</span></div>
+</div><div class="issue-card" data-search="roadmap: interactive pipeline builder ui #5131 roadmap: interactive pipeline builder ui — pipeline composition tooling." style="border-left:4px solid #7c3aed">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5131" target="_blank" style="color:#7c3aed">#5131</a>
+    <span class="issue-title">Roadmap: Interactive Pipeline Builder UI</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span><span class="chip">roadmap</span></div>
+  <div class="reason"><span>💡</span><span>Roadmap: Interactive Pipeline Builder UI — pipeline composition tooling.</span></div>
+</div><div class="issue-card" data-search="spec-driven development with kedro skills #5536 spec-driven development with kedro skills — pipeline authoring workflow." style="border-left:4px solid #7c3aed">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5536" target="_blank" style="color:#7c3aed">#5536</a>
+    <span class="issue-title">Spec-driven development with Kedro Skills</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Spec-driven development with Kedro Skills — pipeline authoring workflow.</span></div>
+</div><div class="issue-card" data-search="define best practice for integrating kedro and dlt #4057 best practices for kedro + dlt integration — pipeline composition pattern." style="border-left:4px solid #7c3aed">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/4057" target="_blank" style="color:#7c3aed">#4057</a>
+    <span class="issue-title">Define best practice for integrating Kedro and dlt</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>Best practices for Kedro + dlt integration — pipeline composition pattern.</span></div>
+</div><div class="issue-card" data-search="reduce required dependencies #5306 reduce required dependencies — affects pipeline package footprint." style="border-left:4px solid #7c3aed">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5306" target="_blank" style="color:#7c3aed">#5306</a>
+    <span class="issue-title">Reduce required dependencies</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>Reduce required dependencies — affects pipeline package footprint.</span></div>
+</div></div>
+</div></div>
+</section><section id="epic_catalog" class="theme-section">
+  <div class="theme-header" style="border-left:6px solid #16a34a; background:#dcfce7">
+    <div class="theme-header-top">
+      <span class="theme-icon">🗄️</span>
+      <div>
+        <div class="theme-title-row">
+          <h2 class="theme-title">Data Catalog &amp; Datasets</h2>
+          <span class="theme-count-badge" style="background:#16a34a">23 issues</span>
+          <span class="theme-meta-pill" style="background:#16a34a20;color:#16a34a;border:1px solid #16a34a40">3 epics</span>
+        </div>
+        <p class="theme-desc">The full DataCatalog surface: DataCatalog 2.0 stabilisation, dataset API extensions, and data validation/quality frameworks.</p>
+      </div>
+    </div>
+  </div>
+  <div class="theme-body"><div class="epic-block" style="border-top:3px solid #16a34a">
+  <div class="epic-header-bar" style="background:#dcfce7">
+    <div class="epic-header-left">
+      <span class="epic-pill" style="background:#16a34a">EPIC 1 of 3</span>
+      <span class="epic-name">DataCatalog 2.0 Stabilisation</span>
+    </div>
+    <span class="epic-issue-count" style="color:#16a34a">5 issues</span>
+  </div>
+  <p class="epic-desc-text">Bugs and regressions in the DataCatalog 2.0 rewrite — versioning, config serialisation, session integration, and Jupyter hot-reload.</p>
+  <div class="issues-grid"><div class="issue-card" data-search="[datacatalog2.0]: running pipeline with versioned datasets gives an error #4738 datacatalog 2.0: versioned datasets throw errors in pipeline runs — a catalog bug." style="border-left:4px solid #16a34a">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/4738" target="_blank" style="color:#16a34a">#4738</a>
+    <span class="issue-title">[DataCatalog2.0]: Running pipeline with versioned datasets gives an error</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Bug Report 🐞</span><span class="chip">Component: IO</span><span class="chip">Component: Jupyter/IPython</span></div>
+  <div class="reason"><span>💡</span><span>DataCatalog 2.0: versioned datasets throw errors in pipeline runs — a catalog bug.</span></div>
+</div><div class="issue-card" data-search="[datacatalog2.0]: `catalog.to_config()` outputs empty version for datasets with `versioned=true` set via `config.yml` #4739 datacatalog 2.0: catalog.to_config() outputs empty version — a catalog serialisation bug." style="border-left:4px solid #16a34a">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/4739" target="_blank" style="color:#16a34a">#4739</a>
+    <span class="issue-title">[DataCatalog2.0]: `catalog.to_config()` outputs empty version for datasets with `versioned=True` set via `config.yml`</span>
+  </div>
+  <div class="chips"><span class="chip">Component: IO</span></div>
+  <div class="reason"><span>💡</span><span>DataCatalog 2.0: catalog.to_config() outputs empty version — a catalog serialisation bug.</span></div>
+</div><div class="issue-card" data-search="memorydataset save not working within kedrosession #5235 memorydataset.save() not working inside kedrosession — a catalog-session integration bug." style="border-left:4px solid #16a34a">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5235" target="_blank" style="color:#16a34a">#5235</a>
+    <span class="issue-title">MemoryDataset save not working within KedroSession</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>MemoryDataset.save() not working inside KedroSession — a catalog-session integration bug.</span></div>
+</div><div class="issue-card" data-search="improve `%load_node` for node that doesn&#x27;t have persisted dataset #4169 improve %load_node for nodes that don&#x27;t have a persisted dataset — dataset/catalog ux." style="border-left:4px solid #16a34a">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/4169" target="_blank" style="color:#16a34a">#4169</a>
+    <span class="issue-title">Improve `%load_node` for node that doesn&#x27;t have persisted dataset</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span><span class="chip">Hacktoberfest</span></div>
+  <div class="reason"><span>💡</span><span>Improve %load_node for nodes that don&#x27;t have a persisted dataset — dataset/catalog UX.</span></div>
+</div><div class="issue-card" data-search="weird behavior of `%reload_kedro` when `--params` contain spaces #4813 weird %reload_kedro behaviour when --params contain spaces — catalog/session interaction." style="border-left:4px solid #16a34a">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/4813" target="_blank" style="color:#16a34a">#4813</a>
+    <span class="issue-title">Weird behavior of `%reload_kedro` when `--params` contain spaces</span>
+  </div>
+  <div class="chips"><span class="chip">OS Sprint</span></div>
+  <div class="reason"><span>💡</span><span>Weird %reload_kedro behaviour when --params contain spaces — catalog/session interaction.</span></div>
+</div></div>
+</div><div class="epic-block" style="border-top:3px solid #16a34a">
+  <div class="epic-header-bar" style="background:#dcfce7">
+    <div class="epic-header-left">
+      <span class="epic-pill" style="background:#16a34a">EPIC 2 of 3</span>
+      <span class="epic-name">Dataset API &amp; Features</span>
+    </div>
+    <span class="epic-issue-count" style="color:#16a34a">12 issues</span>
+  </div>
+  <p class="epic-desc-text">New capabilities: upsert, Pydantic validation, preview types, lazy credentials, runtime load/save args, and custom dataset ergonomics.</p>
+  <div class="issues-grid"><div class="issue-card" data-search="passing extra parameters to custom dataset #1723 about passing extra parameters to a custom dataset — a dataset api/design issue." style="border-left:4px solid #16a34a">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/1723" target="_blank" style="color:#16a34a">#1723</a>
+    <span class="issue-title">Passing Extra Parameters to Custom Dataset</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>About passing extra parameters to a custom dataset — a Dataset API/design issue.</span></div>
+</div><div class="issue-card" data-search="easier customdataset creation #1936 requests a simpler path for creating custom datasets — a datacatalog ergonomics issue." style="border-left:4px solid #16a34a">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/1936" target="_blank" style="color:#16a34a">#1936</a>
+    <span class="issue-title">Easier CustomDataset Creation</span>
+  </div>
+  <div class="chips"><span class="chip">Type: Parent Issue</span></div>
+  <div class="reason"><span>💡</span><span>Requests a simpler path for creating custom datasets — a DataCatalog ergonomics issue.</span></div>
+</div><div class="issue-card" data-search="multiple confirms for the same incrementaldataset #2457 multiple confirm() calls on the same incrementaldataset — a dataset lifecycle/api bug." style="border-left:4px solid #16a34a">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/2457" target="_blank" style="color:#16a34a">#2457</a>
+    <span class="issue-title">Multiple confirms for the same IncrementalDataSet</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Multiple confirm() calls on the same IncrementalDataSet — a dataset lifecycle/API bug.</span></div>
+</div><div class="issue-card" data-search="improve memorydataset copy_mode selection #3551 improve memorydataset copy_mode selection logic — a core dataset behaviour issue." style="border-left:4px solid #16a34a">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3551" target="_blank" style="color:#16a34a">#3551</a>
+    <span class="issue-title">Improve MemoryDataset copy_mode selection</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Improve MemoryDataset copy_mode selection logic — a core dataset behaviour issue.</span></div>
+</div><div class="issue-card" data-search="support for lazy credentials resolution #3634 requests lazy credentials resolution in the catalog — a datacatalog feature." style="border-left:4px solid #16a34a">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3634" target="_blank" style="color:#16a34a">#3634</a>
+    <span class="issue-title">Support for lazy credentials resolution</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Requests lazy credentials resolution in the catalog — a DataCatalog feature.</span></div>
+</div><div class="issue-card" data-search="how to get the actual method selected to read a generic dataset?  #3636 asks how to inspect which read method was selected for a generic dataset." style="border-left:4px solid #16a34a">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3636" target="_blank" style="color:#16a34a">#3636</a>
+    <span class="issue-title">How to get the actual method selected to read a Generic Dataset? </span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>Asks how to inspect which read method was selected for a Generic Dataset.</span></div>
+</div><div class="issue-card" data-search="access dataset filepath via public api for file-backed datasets  #3929 requests a public api to access a dataset&#x27;s filepath — a datacatalog api gap." style="border-left:4px solid #16a34a">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3929" target="_blank" style="color:#16a34a">#3929</a>
+    <span class="issue-title">Access dataset filepath via public API for file-backed datasets </span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Requests a public API to access a dataset&#x27;s filepath — a DataCatalog API gap.</span></div>
+</div><div class="issue-card" data-search="dataset `load` / `save` method cannot take arguments #4346 dataset load/save methods can&#x27;t accept runtime arguments — a dataset api limitation." style="border-left:4px solid #16a34a">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/4346" target="_blank" style="color:#16a34a">#4346</a>
+    <span class="issue-title">Dataset `load` / `save` method cannot take arguments</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Dataset load/save methods can&#x27;t accept runtime arguments — a dataset API limitation.</span></div>
+</div><div class="issue-card" data-search="prevent serialization/pickling errors when using cloud-based datasets (e.g., s3). #4690 serialization/pickling errors with cloud-backed datasets — a dataset compatibility issue." style="border-left:4px solid #16a34a">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/4690" target="_blank" style="color:#16a34a">#4690</a>
+    <span class="issue-title">Prevent serialization/pickling errors when using cloud-based datasets (e.g., S3).</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>Serialization/pickling errors with cloud-backed datasets — a dataset compatibility issue.</span></div>
+</div><div class="issue-card" data-search="add pydantic schema validation for pandas datasets #5078 add pydantic schema validation for pandas datasets — a dataset validation feature." style="border-left:4px solid #16a34a">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5078" target="_blank" style="color:#16a34a">#5078</a>
+    <span class="issue-title">Add Pydantic schema validation for Pandas datasets</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Add Pydantic schema validation for Pandas datasets — a dataset validation feature.</span></div>
+</div><div class="issue-card" data-search="support upsert operations for sql datasets #5090 support upsert for sql datasets — a dataset write-mode feature request." style="border-left:4px solid #16a34a">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5090" target="_blank" style="color:#16a34a">#5090</a>
+    <span class="issue-title">Support upsert operations for SQL datasets</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Support upsert for SQL datasets — a dataset write-mode feature request.</span></div>
+</div><div class="issue-card" data-search="preview type support for yaml datasets #5124 preview type support for yaml datasets — a dataset inspection/typing feature." style="border-left:4px solid #16a34a">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5124" target="_blank" style="color:#16a34a">#5124</a>
+    <span class="issue-title">Preview type support for YAML Datasets</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Preview type support for YAML datasets — a dataset inspection/typing feature.</span></div>
+</div></div>
+</div><div class="epic-block" style="border-top:3px solid #16a34a">
+  <div class="epic-header-bar" style="background:#dcfce7">
+    <div class="epic-header-left">
+      <span class="epic-pill" style="background:#16a34a">EPIC 3 of 3</span>
+      <span class="epic-name">Data Validation &amp; Quality</span>
+    </div>
+    <span class="epic-issue-count" style="color:#16a34a">6 issues</span>
+  </div>
+  <p class="epic-desc-text">Frameworks and integrations for ensuring data quality — validation strategies, credential docs, and dataset usage guides.</p>
+  <div class="issues-grid"><div class="issue-card" data-search="data quality management for kedro pipelines #5311 data quality management for pipelines — a dataset-level quality framework request." style="border-left:4px solid #16a34a">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5311" target="_blank" style="color:#16a34a">#5311</a>
+    <span class="issue-title">Data quality management for Kedro pipelines</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>Data quality management for pipelines — a dataset-level quality framework request.</span></div>
+</div><div class="issue-card" data-search="explore a kedro-first approach to data validation #5390 explore a kedro-first approach to data validation — dataset validation strategy." style="border-left:4px solid #16a34a">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5390" target="_blank" style="color:#16a34a">#5390</a>
+    <span class="issue-title">Explore a Kedro-First Approach to Data Validation</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Explore a Kedro-first approach to data validation — dataset validation strategy.</span></div>
+</div><div class="issue-card" data-search="cacheddataset example usage #3616 requests example usage for cacheddataset — a dataset documentation/usability issue." style="border-left:4px solid #16a34a">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3616" target="_blank" style="color:#16a34a">#3616</a>
+    <span class="issue-title">CachedDataset example usage</span>
+  </div>
+  <div class="chips"><span class="chip">Component: Documentation 📄</span><span class="chip">Help Wanted :pray:</span></div>
+  <div class="reason"><span>💡</span><span>Requests example usage for CachedDataset — a dataset documentation/usability issue.</span></div>
+</div><div class="issue-card" data-search="update documentation around credentials management #2669 asks for better docs and tooling around credentials management in the catalog." style="border-left:4px solid #16a34a">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/2669" target="_blank" style="color:#16a34a">#2669</a>
+    <span class="issue-title">Update documentation around credentials management</span>
+  </div>
+  <div class="chips"><span class="chip">Component: Documentation 📄</span></div>
+  <div class="reason"><span>💡</span><span>Asks for better docs and tooling around credentials management in the catalog.</span></div>
+</div><div class="issue-card" data-search="review and rework the &quot;create a custom dataset&quot; page in data section #2937 review and rework the &#x27;create a custom dataset&#x27; documentation page." style="border-left:4px solid #16a34a">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/2937" target="_blank" style="color:#16a34a">#2937</a>
+    <span class="issue-title">Review and rework the &quot;Create a custom dataset&quot; page in data section</span>
+  </div>
+  <div class="chips"><span class="chip">Component: Documentation 📄</span></div>
+  <div class="reason"><span>💡</span><span>Review and rework the &#x27;Create a custom dataset&#x27; documentation page.</span></div>
+</div><div class="issue-card" data-search="revise the advanced data catalog docs about partitioned/incremental datasets #2941 revise advanced docs covering partitioned/incremental datasets." style="border-left:4px solid #16a34a">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/2941" target="_blank" style="color:#16a34a">#2941</a>
+    <span class="issue-title">Revise the advanced data catalog docs about partitioned/incremental datasets</span>
+  </div>
+  <div class="chips"><span class="chip">Component: Documentation 📄</span></div>
+  <div class="reason"><span>💡</span><span>Revise advanced docs covering partitioned/incremental datasets.</span></div>
+</div></div>
+</div></div>
+</section><section id="epic_session" class="theme-section">
+  <div class="theme-header" style="border-left:6px solid #dc2626; background:#fee2e2">
+    <div class="theme-header-top">
+      <span class="theme-icon">🚀</span>
+      <div>
+        <div class="theme-title-row">
+          <h2 class="theme-title">KedroSession &amp; Execution</h2>
+          <span class="theme-count-badge" style="background:#dc2626">18 issues</span>
+          <span class="theme-meta-pill" style="background:#dc262620;color:#dc2626;border:1px solid #dc262640">2 epics</span>
+        </div>
+        <p class="theme-desc">How Kedro runs — session architecture, KedroServiceSession, performance, parallelism, and execution configuration.</p>
+      </div>
+    </div>
+  </div>
+  <div class="theme-body"><div class="epic-block" style="border-top:3px solid #dc2626">
+  <div class="epic-header-bar" style="background:#fee2e2">
+    <div class="epic-header-left">
+      <span class="epic-pill" style="background:#dc2626">EPIC 1 of 2</span>
+      <span class="epic-name">KedroServiceSession Architecture</span>
+    </div>
+    <span class="epic-issue-count" style="color:#dc2626">9 issues</span>
+  </div>
+  <p class="epic-desc-text">Design and build KedroServiceSession as a long-lived, stateful, multi-run session suitable for API and agentic use cases.</p>
+  <div class="issues-grid"><div class="issue-card" data-search="kedro service for universal deployment #5262 kedro service for universal deployment — kedroservicesession architecture." style="border-left:4px solid #dc2626">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5262" target="_blank" style="color:#dc2626">#5262</a>
+    <span class="issue-title">Kedro Service for Universal Deployment</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Kedro Service for Universal Deployment — KedroServiceSession architecture.</span></div>
+</div><div class="issue-card" data-search="design kedroservicesession as a long-lived, multi-run kedro session #5264 design kedroservicesession as a long-lived multi-run session — session lifecycle." style="border-left:4px solid #dc2626">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5264" target="_blank" style="color:#dc2626">#5264</a>
+    <span class="issue-title">Design KedroServiceSession as a long-lived, multi-run Kedro session</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Design KedroServiceSession as a long-lived multi-run session — session lifecycle.</span></div>
+</div><div class="issue-card" data-search="integrate api layer with kedroservicesession #5265 integrate api layer with kedroservicesession — session/api surface." style="border-left:4px solid #dc2626">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5265" target="_blank" style="color:#dc2626">#5265</a>
+    <span class="issue-title">Integrate API Layer with KedroServiceSession</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>Integrate API layer with KedroServiceSession — session/API surface.</span></div>
+</div><div class="issue-card" data-search="kedroservicesession v2: stateful session #5535 kedroservicesession v2: stateful session — session lifecycle v2 design." style="border-left:4px solid #dc2626">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5535" target="_blank" style="color:#dc2626">#5535</a>
+    <span class="issue-title">KedroServiceSession v2: stateful session</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>KedroServiceSession v2: stateful session — session lifecycle v2 design.</span></div>
+</div><div class="issue-card" data-search="add benchmark tests for `kedroservicesession` #5624 benchmark tests for kedroservicesession — session performance validation." style="border-left:4px solid #dc2626">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5624" target="_blank" style="color:#dc2626">#5624</a>
+    <span class="issue-title">Add benchmark tests for `KedroServiceSession`</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Benchmark tests for KedroServiceSession — session performance validation.</span></div>
+</div><div class="issue-card" data-search="investigate and propose solution to performance bottleneck in kedrosession #5276 performance bottleneck investigation in kedrosession — session execution perf." style="border-left:4px solid #dc2626">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5276" target="_blank" style="color:#dc2626">#5276</a>
+    <span class="issue-title">Investigate and propose solution to performance bottleneck in KedroSession</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Performance bottleneck investigation in KedroSession — session execution perf.</span></div>
+</div><div class="issue-card" data-search="kedrosession and pipeline loading: design &amp; performance considerations #5354 kedrosession and pipeline loading design &amp; performance — session architecture." style="border-left:4px solid #dc2626">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5354" target="_blank" style="color:#dc2626">#5354</a>
+    <span class="issue-title">KedroSession and Pipeline Loading: Design &amp; Performance Considerations</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>KedroSession and pipeline loading design &amp; performance — session architecture.</span></div>
+</div><div class="issue-card" data-search="add docs about customisable `session_class` #5437 add docs about customisable session_class — session configuration docs." style="border-left:4px solid #dc2626">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5437" target="_blank" style="color:#dc2626">#5437</a>
+    <span class="issue-title">Add docs about customisable `SESSION_CLASS`</span>
+  </div>
+  <div class="chips"><span class="chip">Component: Documentation 📄</span></div>
+  <div class="reason"><span>💡</span><span>Add docs about customisable SESSION_CLASS — session configuration docs.</span></div>
+</div><div class="issue-card" data-search="stateful session support for rag-based use cases #5092 stateful session for rag use cases — kedrosession lifecycle feature." style="border-left:4px solid #dc2626">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5092" target="_blank" style="color:#dc2626">#5092</a>
+    <span class="issue-title">Stateful session support for RAG-based use cases</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Stateful session for RAG use cases — KedroSession lifecycle feature.</span></div>
+</div></div>
+</div><div class="epic-block" style="border-top:3px solid #dc2626">
+  <div class="epic-header-bar" style="background:#fee2e2">
+    <div class="epic-header-left">
+      <span class="epic-pill" style="background:#dc2626">EPIC 2 of 2</span>
+      <span class="epic-name">Core Session Config &amp; Performance</span>
+    </div>
+    <span class="epic-issue-count" style="color:#dc2626">9 issues</span>
+  </div>
+  <p class="epic-desc-text">Improvements to the standard KedroSession: customisation, parallelism, startup time, injection API, CLI run arguments, and runner configuration.</p>
+  <div class="issues-grid"><div class="issue-card" data-search="make `session_id` customisable. #1731 make session_id customisable — kedrosession api feature." style="border-left:4px solid #dc2626">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/1731" target="_blank" style="color:#dc2626">#1731</a>
+    <span class="issue-title">Make `session_id` customisable.</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>Make session_id customisable — KedroSession API feature.</span></div>
+</div><div class="issue-card" data-search="allow injecting data into a `kedrosession` run #2169 inject data into a kedrosession run — session execution api." style="border-left:4px solid #dc2626">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/2169" target="_blank" style="color:#dc2626">#2169</a>
+    <span class="issue-title">Allow injecting data into a `KedroSession` run</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span><span class="chip">Stage: Technical Design 🎨</span></div>
+  <div class="reason"><span>💡</span><span>Inject data into a KedroSession run — session execution API.</span></div>
+</div><div class="issue-card" data-search="investigate how session/context should be re-designed to work well for api use-cases #2182 redesign session/context for api use cases — kedrosession architecture." style="border-left:4px solid #dc2626">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/2182" target="_blank" style="color:#dc2626">#2182</a>
+    <span class="issue-title">Investigate how session/context should be re-designed to work well for API use-cases</span>
+  </div>
+  <div class="chips"><span class="chip">Stage: Technical Design 🎨</span><span class="chip">Stage: User Research :microscope:</span></div>
+  <div class="reason"><span>💡</span><span>Redesign session/context for API use cases — KedroSession architecture.</span></div>
+</div><div class="issue-card" data-search="allow to pass `max_workers` through cli to limit the number of parallel nodes #809 pass max_workers via cli to cap parallel execution — runner configuration feature." style="border-left:4px solid #dc2626">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/809" target="_blank" style="color:#dc2626">#809</a>
+    <span class="issue-title">Allow to pass `max_workers` through CLI to limit the number of parallel nodes</span>
+  </div>
+  <div class="chips"><span class="chip">Help Wanted :pray:</span><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Pass max_workers via CLI to cap parallel execution — runner configuration feature.</span></div>
+</div><div class="issue-card" data-search="`kedro run --params key=1,2,3` kedro cli does not take list as argument #2552 kedro run --params doesn&#x27;t accept list values — runner/cli argument parsing." style="border-left:4px solid #dc2626">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/2552" target="_blank" style="color:#dc2626">#2552</a>
+    <span class="issue-title">`kedro run --params key=1,2,3` Kedro CLI does not take list as argument</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>kedro run --params doesn&#x27;t accept list values — runner/CLI argument parsing.</span></div>
+</div><div class="issue-card" data-search="improve kedro startup time, by only importing the pipeline that we are running. #5207 improve startup time by importing only the active pipeline — session/import performance." style="border-left:4px solid #dc2626">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5207" target="_blank" style="color:#dc2626">#5207</a>
+    <span class="issue-title">Improve kedro startup time, by only importing the pipeline that we are running.</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span><span class="chip">Component: Framework</span></div>
+  <div class="reason"><span>💡</span><span>Improve startup time by importing only the active pipeline — session/import performance.</span></div>
+</div><div class="issue-card" data-search="deployment support/kedro deployer #2058 deployment support / kedro deployer — execution environment management." style="border-left:4px solid #dc2626">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/2058" target="_blank" style="color:#dc2626">#2058</a>
+    <span class="issue-title">Deployment support/Kedro deployer</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>Deployment support / Kedro deployer — execution environment management.</span></div>
+</div><div class="issue-card" data-search="spike for `kedro-mcp-server` plugin #5219 spike for kedro-mcp-server plugin — session/execution via mcp protocol." style="border-left:4px solid #dc2626">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5219" target="_blank" style="color:#dc2626">#5219</a>
+    <span class="issue-title">Spike for `kedro-mcp-server` plugin</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Spike for kedro-mcp-server plugin — session/execution via MCP protocol.</span></div>
+</div><div class="issue-card" data-search="ability to set a custom runner globally #3255 ability to set a custom runner globally — pipeline/runner configuration api." style="border-left:4px solid #dc2626">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3255" target="_blank" style="color:#dc2626">#3255</a>
+    <span class="issue-title">Ability to set a custom runner globally</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Ability to set a custom runner globally — pipeline/runner configuration API.</span></div>
+</div></div>
+</div></div>
+</section><section id="epic_config" class="theme-section">
+  <div class="theme-header" style="border-left:6px solid #ca8a04; background:#fef9c3">
+    <div class="theme-header-top">
+      <span class="theme-icon">⚙️</span>
+      <div>
+        <div class="theme-title-row">
+          <h2 class="theme-title">Configuration Management</h2>
+          <span class="theme-count-badge" style="background:#ca8a04">9 issues</span>
+          <span class="theme-meta-pill" style="background:#f1f5f9;color:#94a3b8;border:1px solid #e2e8f0">flat issues</span>
+        </div>
+        <p class="theme-desc">OmegaConfigLoader, credentials, environment config, resolvers, and security hardening for config sources.</p>
+      </div>
+    </div>
+  </div>
+  <div class="theme-body"><div class="epic-block flat-epic" style="border-top:3px solid #94a3b8">
+  <div class="epic-header-bar" style="background:#f8fafc">
+    <div class="epic-header-left">
+      <span class="epic-pill" style="background:#94a3b8">ISSUES</span>
+      <span class="epic-name" style="color:#64748b">Independent issues — no epic grouping</span>
+    </div>
+    <span class="epic-issue-count" style="color:#94a3b8">9 issues</span>
+  </div>
+  <div class="issues-grid"><div class="issue-card" data-search="pass kwargs to _register_new_resolvers from settings.py #2925 requests passing kwargs to _register_new_resolvers from settings.py — omegaconfig resolver config." style="border-left:4px solid #ca8a04">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/2925" target="_blank" style="color:#ca8a04">#2925</a>
+    <span class="issue-title">Pass kwargs to _register_new_resolvers from settings.py</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>Requests passing kwargs to _register_new_resolvers from settings.py — OmegaConfig resolver config.</span></div>
+</div><div class="issue-card" data-search="enable access to omegaconfigloader dictconfig instead of dict only #2973 allow access to raw omegaconf dictconfig instead of plain dict — config loader api." style="border-left:4px solid #ca8a04">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/2973" target="_blank" style="color:#ca8a04">#2973</a>
+    <span class="issue-title">Enable access to OmegaConfigLoader DictConfig instead of dict only</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Allow access to raw OmegaConf DictConfig instead of plain dict — config loader API.</span></div>
+</div><div class="issue-card" data-search="simplify setting credentials when switching between different environments #3940 simplify credential switching between environments — config/credentials management ux." style="border-left:4px solid #ca8a04">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3940" target="_blank" style="color:#ca8a04">#3940</a>
+    <span class="issue-title">Simplify setting credentials when switching between different environments</span>
+  </div>
+  <div class="chips"><span class="chip">Component: Documentation 📄</span><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Simplify credential switching between environments — config/credentials management UX.</span></div>
+</div><div class="issue-card" data-search="add `--from-env` cli flag [poc implementation available] #4155 add --from-env cli flag to load params from env vars — configuration source feature." style="border-left:4px solid #ca8a04">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/4155" target="_blank" style="color:#ca8a04">#4155</a>
+    <span class="issue-title">Add `--from-env` CLI flag [PoC implementation available]</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Add --from-env CLI flag to load params from env vars — configuration source feature.</span></div>
+</div><div class="issue-card" data-search="testing hooks in kedro #4161 testing hooks in kedro — relates to settings.py hook registration and config." style="border-left:4px solid #ca8a04">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/4161" target="_blank" style="color:#ca8a04">#4161</a>
+    <span class="issue-title">Testing Hooks in Kedro</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Testing hooks in Kedro — relates to settings.py hook registration and config.</span></div>
+</div><div class="issue-card" data-search="kedro cli `--help` bootstraps project, which might trigger unintended imports #4399 cli --help bootstraps the project, importing settings.py unnecessarily — config loading order." style="border-left:4px solid #ca8a04">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/4399" target="_blank" style="color:#ca8a04">#4399</a>
+    <span class="issue-title">Kedro CLI `--help` bootstraps project, which might trigger unintended imports</span>
+  </div>
+  <div class="chips"><span class="chip">performance</span></div>
+  <div class="reason"><span>💡</span><span>CLI --help bootstraps the project, importing settings.py unnecessarily — config loading order.</span></div>
+</div><div class="issue-card" data-search="enable concurrent kedrosession usage #5392 enable concurrent kedrosession usage — requires thread-safe config/session state." style="border-left:4px solid #ca8a04">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5392" target="_blank" style="color:#ca8a04">#5392</a>
+    <span class="issue-title">Enable concurrent KedroSession usage</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span><span class="chip">Community</span></div>
+  <div class="reason"><span>💡</span><span>Enable concurrent KedroSession usage — requires thread-safe config/session state.</span></div>
+</div><div class="issue-card" data-search="docs: warn that `conf_source` is a trusted operator input and must never be derived from untrusted data #5635 warn that conf_source is a trusted input — a security-focused config documentation issue." style="border-left:4px solid #ca8a04">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5635" target="_blank" style="color:#ca8a04">#5635</a>
+    <span class="issue-title">docs: warn that `conf_source` is a trusted operator input and must never be derived from untrusted data</span>
+  </div>
+  <div class="chips"><span class="chip">Component: Documentation 📄</span></div>
+  <div class="reason"><span>💡</span><span>Warn that conf_source is a trusted input — a security-focused config documentation issue.</span></div>
+</div><div class="issue-card" data-search="add opt-in url scheme/host allowlist to `omegaconfigloader` for remote `conf_source` #5636 add opt-in url allowlist to omegaconfigloader for remote conf_source — config security feature." style="border-left:4px solid #ca8a04">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5636" target="_blank" style="color:#ca8a04">#5636</a>
+    <span class="issue-title">Add opt-in URL scheme/host allowlist to `OmegaConfigLoader` for remote `conf_source`</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Add opt-in URL allowlist to OmegaConfigLoader for remote conf_source — config security feature.</span></div>
+</div></div>
+</div></div>
+</section><section id="epic_cli" class="theme-section">
+  <div class="theme-header" style="border-left:6px solid #15803d; background:#f0fdf4">
+    <div class="theme-header-top">
+      <span class="theme-icon">💻</span>
+      <div>
+        <div class="theme-title-row">
+          <h2 class="theme-title">CLI &amp; Developer Experience</h2>
+          <span class="theme-count-badge" style="background:#15803d">18 issues</span>
+          <span class="theme-meta-pill" style="background:#15803d20;color:#15803d;border:1px solid #15803d40">4 epics</span>
+        </div>
+        <p class="theme-desc">The end-to-end developer experience: CLI ergonomics, project templates, starters, hooks/plugins, Jupyter magic commands, and packaging.</p>
+      </div>
+    </div>
+  </div>
+  <div class="theme-body"><div class="epic-block" style="border-top:3px solid #15803d">
+  <div class="epic-header-bar" style="background:#f0fdf4">
+    <div class="epic-header-left">
+      <span class="epic-pill" style="background:#15803d">EPIC 1 of 4</span>
+      <span class="epic-name">CLI &amp; Tooling</span>
+    </div>
+    <span class="epic-issue-count" style="color:#15803d">11 issues</span>
+  </div>
+  <p class="epic-desc-text">Core CLI improvements — tracebacks, run logs, packaging, public utilities, telemetry integration, and dependency management.</p>
+  <div class="issues-grid"><div class="issue-card" data-search="rich installation creates a non-uniform cli experience #1752 rich installation causes non-uniform cli experience — cli consistency issue." style="border-left:4px solid #15803d">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/1752" target="_blank" style="color:#15803d">#1752</a>
+    <span class="issue-title">Rich installation creates a non-uniform CLI experience</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>Rich installation causes non-uniform CLI experience — CLI consistency issue.</span></div>
+</div><div class="issue-card" data-search="kedro tracebacks are overwhelming #2401 kedro tracebacks are overwhelming — developer experience / error ux." style="border-left:4px solid #15803d">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/2401" target="_blank" style="color:#15803d">#2401</a>
+    <span class="issue-title">Kedro tracebacks are overwhelming</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span><span class="chip">Stage: Technical Design 🎨</span><span class="chip">Type: Parent Issue</span></div>
+  <div class="reason"><span>💡</span><span>Kedro tracebacks are overwhelming — developer experience / error UX.</span></div>
+</div><div class="issue-card" data-search="remove the default entry point from the kedro project template and starters #2495 remove default entry point from project template — project scaffolding/cli ux." style="border-left:4px solid #15803d">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/2495" target="_blank" style="color:#15803d">#2495</a>
+    <span class="issue-title">Remove the default entry point from the Kedro project template and starters</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Remove default entry point from project template — project scaffolding/CLI UX.</span></div>
+</div><div class="issue-card" data-search="improve the kedro run log, make &quot;go to definition&quot; easier #3672 improve kedro run log to make &#x27;go to definition&#x27; easier — cli run output ux." style="border-left:4px solid #15803d">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3672" target="_blank" style="color:#15803d">#3672</a>
+    <span class="issue-title">Improve the Kedro Run log, make &quot;go to definition&quot; easier</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Improve kedro run log to make &#x27;go to definition&#x27; easier — CLI run output UX.</span></div>
+</div><div class="issue-card" data-search="update `kedro new` hint and docs to clarify how to provide a project tools selection to `--tools` #3735 update kedro new hints for tools selection — cli onboarding ux." style="border-left:4px solid #15803d">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3735" target="_blank" style="color:#15803d">#3735</a>
+    <span class="issue-title">Update `kedro new` hint and docs to clarify how to provide a project tools selection to `--tools`</span>
+  </div>
+  <div class="chips"><span class="chip">Design: UX</span></div>
+  <div class="reason"><span>💡</span><span>Update kedro new hints for tools selection — CLI onboarding UX.</span></div>
+</div><div class="issue-card" data-search="integrate `kedro-telemetry` package into kedro #3999 integrate kedro-telemetry into kedro — cli/framework integration." style="border-left:4px solid #15803d">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3999" target="_blank" style="color:#15803d">#3999</a>
+    <span class="issue-title">Integrate `kedro-telemetry` package into Kedro</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Integrate kedro-telemetry into Kedro — CLI/framework integration.</span></div>
+</div><div class="issue-card" data-search="add option to include configuration (`conf`) in the kedro package for source code? #4316 option to include conf/ in the kedro package — packaging/cli feature." style="border-left:4px solid #15803d">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/4316" target="_blank" style="color:#15803d">#4316</a>
+    <span class="issue-title">Add Option to Include Configuration (`conf`) in the Kedro Package for Source Code?</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Option to include conf/ in the Kedro package — packaging/CLI feature.</span></div>
+</div><div class="issue-card" data-search="optional dependencies vs. dependency groups in kedro starter #4648 optional dependencies vs dependency groups in starters — developer tooling." style="border-left:4px solid #15803d">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/4648" target="_blank" style="color:#15803d">#4648</a>
+    <span class="issue-title">Optional dependencies vs. dependency groups in kedro starter</span>
+  </div>
+  <div class="chips"><span class="chip">Help Wanted :pray:</span></div>
+  <div class="reason"><span>💡</span><span>Optional dependencies vs dependency groups in starters — developer tooling.</span></div>
+</div><div class="issue-card" data-search="roadmap: assisting llms with kedro knowledge and user consumption #5130 roadmap: assisting llms with kedro knowledge — developer tooling strategy." style="border-left:4px solid #15803d">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5130" target="_blank" style="color:#15803d">#5130</a>
+    <span class="issue-title">Roadmap: Assisting LLMs with Kedro knowledge and user consumption</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span><span class="chip">roadmap</span></div>
+  <div class="reason"><span>💡</span><span>Roadmap: Assisting LLMs with Kedro knowledge — developer tooling strategy.</span></div>
+</div><div class="issue-card" data-search="exclude benchmark tests from packaging #5604 exclude benchmark tests from packaging — packaging/build system concern." style="border-left:4px solid #15803d">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5604" target="_blank" style="color:#15803d">#5604</a>
+    <span class="issue-title">Exclude benchmark tests from packaging</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Exclude benchmark tests from packaging — packaging/build system concern.</span></div>
+</div><div class="issue-card" data-search="make kedro cli utilities functions public #4978 making cli utility functions public — surfaces through a documentation/api discoverability gap." style="border-left:4px solid #15803d">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/4978" target="_blank" style="color:#15803d">#4978</a>
+    <span class="issue-title">Make Kedro CLI utilities functions public</span>
+  </div>
+  <div class="chips"><span class="chip">Component: Framework</span></div>
+  <div class="reason"><span>💡</span><span>Making CLI utility functions public — surfaces through a documentation/API discoverability gap.</span></div>
+</div></div>
+</div><div class="epic-block" style="border-top:3px solid #15803d">
+  <div class="epic-header-bar" style="background:#f0fdf4">
+    <div class="epic-header-left">
+      <span class="epic-pill" style="background:#15803d">EPIC 2 of 4</span>
+      <span class="epic-name">Hooks &amp; Plugin API</span>
+    </div>
+    <span class="epic-issue-count" style="color:#15803d">2 issues</span>
+  </div>
+  <p class="epic-desc-text">Validation of hook implementations against specs, and enabling plugins to carry runtime configuration and extend CLI arguments.</p>
+  <div class="issues-grid"><div class="issue-card" data-search="validate hook_impl respect hook_spec #2862 validate that hook_impl matches hook_spec — hooks api correctness." style="border-left:4px solid #15803d">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/2862" target="_blank" style="color:#15803d">#2862</a>
+    <span class="issue-title">Validate hook_impl respect hook_spec</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Validate that hook_impl matches hook_spec — hooks API correctness.</span></div>
+</div><div class="issue-card" data-search="spike: provide a way for plugins to have runtime configuration and extend cli arguments #2866 allow plugins to have runtime configuration and extend cli args — plugin api." style="border-left:4px solid #15803d">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/2866" target="_blank" style="color:#15803d">#2866</a>
+    <span class="issue-title">Spike: Provide a way for plugins to have runtime configuration and extend CLI arguments</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Allow plugins to have runtime configuration and extend CLI args — plugin API.</span></div>
+</div></div>
+</div><div class="epic-block" style="border-top:3px solid #15803d">
+  <div class="epic-header-bar" style="background:#f0fdf4">
+    <div class="epic-header-left">
+      <span class="epic-pill" style="background:#15803d">EPIC 3 of 4</span>
+      <span class="epic-name">Project Template &amp; Starters</span>
+    </div>
+    <span class="epic-issue-count" style="color:#15803d">2 issues</span>
+  </div>
+  <p class="epic-desc-text">Decoupling starters from the framework, avoiding hardcoded requirements, and improving the tools selection flow.</p>
+  <div class="issues-grid"><div class="issue-card" data-search="avoid hardcoding requirements in project templates hooks `utils.py` #3432 avoid hardcoding requirements in project template hooks — starter/template quality." style="border-left:4px solid #15803d">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3432" target="_blank" style="color:#15803d">#3432</a>
+    <span class="issue-title">Avoid hardcoding requirements in project templates hooks `utils.py`</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Avoid hardcoding requirements in project template hooks — starter/template quality.</span></div>
+</div><div class="issue-card" data-search="decouple starters from framework in tool selection flow #3791 decouple starters from the framework in the tool selection flow — starter architecture." style="border-left:4px solid #15803d">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3791" target="_blank" style="color:#15803d">#3791</a>
+    <span class="issue-title">Decouple starters from framework in tool selection flow</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>Decouple starters from the framework in the tool selection flow — starter architecture.</span></div>
+</div></div>
+</div><div class="epic-block" style="border-top:3px solid #15803d">
+  <div class="epic-header-bar" style="background:#f0fdf4">
+    <div class="epic-header-left">
+      <span class="epic-pill" style="background:#15803d">EPIC 4 of 4</span>
+      <span class="epic-name">Jupyter &amp; Interactive</span>
+    </div>
+    <span class="epic-issue-count" style="color:#15803d">3 issues</span>
+  </div>
+  <p class="epic-desc-text">Jupyter magic commands (%load_node, %run_viz, %reload_kedro) and Databricks notebook compatibility.</p>
+  <div class="issues-grid"><div class="issue-card" data-search="removing kedrocontext params and catalog hot-reload #1460 removing kedrocontext params and catalog hot-reload — jupyter/interactive session state." style="border-left:4px solid #15803d">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/1460" target="_blank" style="color:#15803d">#1460</a>
+    <span class="issue-title">Removing KedroContext params and catalog hot-reload</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>Removing KedroContext params and catalog hot-reload — Jupyter/interactive session state.</span></div>
+</div><div class="issue-card" data-search="%run_viz does not work properly in databricks notebooks #5322 %run_viz doesn&#x27;t work in databricks notebooks — jupyter magic/interactive tooling bug." style="border-left:4px solid #15803d">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5322" target="_blank" style="color:#15803d">#5322</a>
+    <span class="issue-title">%run_viz does not work properly in Databricks notebooks</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>%run_viz doesn&#x27;t work in Databricks notebooks — Jupyter magic/interactive tooling bug.</span></div>
+</div><div class="issue-card" data-search="add support for multi-node for `%load_node` or `%load_pipeline` #4170 multi-node support for %load_node/%load_pipeline — pipeline interactive execution." style="border-left:4px solid #15803d">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/4170" target="_blank" style="color:#15803d">#4170</a>
+    <span class="issue-title">Add support for multi-node for `%load_node` or `%load_pipeline`</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Multi-node support for %load_node/%load_pipeline — pipeline interactive execution.</span></div>
+</div></div>
+</div></div>
+</section><section id="epic_ai" class="theme-section">
+  <div class="theme-header" style="border-left:6px solid #0369a1; background:#f0f9ff">
+    <div class="theme-header-top">
+      <span class="theme-icon">🤖</span>
+      <div>
+        <div class="theme-title-row">
+          <h2 class="theme-title">AI, LLM &amp; Agentic Workflows</h2>
+          <span class="theme-count-badge" style="background:#0369a1">9 issues</span>
+          <span class="theme-meta-pill" style="background:#f1f5f9;color:#94a3b8;border:1px solid #e2e8f0">flat issues</span>
+        </div>
+        <p class="theme-desc">Kedro&#x27;s emerging AI-native surface: skills plugins, MCP server, LLM streaming, agentic pipeline patterns, and benchmarking AI coding assistants.</p>
+      </div>
+    </div>
+  </div>
+  <div class="theme-body"><div class="epic-block flat-epic" style="border-top:3px solid #94a3b8">
+  <div class="epic-header-bar" style="background:#f8fafc">
+    <div class="epic-header-left">
+      <span class="epic-pill" style="background:#94a3b8">ISSUES</span>
+      <span class="epic-name" style="color:#64748b">Independent issues — no epic grouping</span>
+    </div>
+    <span class="epic-issue-count" style="color:#94a3b8">9 issues</span>
+  </div>
+  <div class="issues-grid"><div class="issue-card" data-search="use kedro pipelines as tools #5046 use kedro pipelines as tools (for llm agents) — agentic pipeline usage pattern." style="border-left:4px solid #0369a1">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5046" target="_blank" style="color:#0369a1">#5046</a>
+    <span class="issue-title">Use Kedro pipelines as tools</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>Use Kedro pipelines as tools (for LLM agents) — agentic pipeline usage pattern.</span></div>
+</div><div class="issue-card" data-search="collecting real user feedback on llm prompts #5086 collect real user feedback on llm prompts — llm workflow feedback loop." style="border-left:4px solid #0369a1">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5086" target="_blank" style="color:#0369a1">#5086</a>
+    <span class="issue-title">Collecting Real User Feedback on LLM Prompts</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Collect real user feedback on LLM prompts — LLM workflow feedback loop.</span></div>
+</div><div class="issue-card" data-search="implement operator session for monitoring #5091 implement operator session for monitoring — agentic/observability feature." style="border-left:4px solid #0369a1">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5091" target="_blank" style="color:#0369a1">#5091</a>
+    <span class="issue-title">Implement operator session for monitoring</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Implement operator session for monitoring — agentic/observability feature.</span></div>
+</div><div class="issue-card" data-search="implement prototype test setup for benchmarking ai coding assistants on kedro tasks #5188 benchmark ai coding assistants on kedro tasks — ai tooling evaluation." style="border-left:4px solid #0369a1">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5188" target="_blank" style="color:#0369a1">#5188</a>
+    <span class="issue-title">Implement prototype test setup for benchmarking AI coding assistants on Kedro tasks</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Benchmark AI coding assistants on Kedro tasks — AI tooling evaluation.</span></div>
+</div><div class="issue-card" data-search="record a technical demo of agentic workflow #5308 record a technical demo of agentic workflow — llm/agentic content." style="border-left:4px solid #0369a1">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5308" target="_blank" style="color:#0369a1">#5308</a>
+    <span class="issue-title">Record a technical demo of agentic workflow</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Record a technical demo of agentic workflow — LLM/agentic content.</span></div>
+</div><div class="issue-card" data-search="explore support for llm streaming mode in kedro pipelines #5310 explore llm streaming mode in kedro pipelines — llm execution feature." style="border-left:4px solid #0369a1">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5310" target="_blank" style="color:#0369a1">#5310</a>
+    <span class="issue-title">Explore support for LLM streaming mode in Kedro pipelines</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Explore LLM streaming mode in Kedro pipelines — LLM execution feature.</span></div>
+</div><div class="issue-card" data-search="[spike]add `agents.md` (with `claude.md` symlink) to all kedro ecosystem repositories #5408 add agents.md/claude.md to kedro ecosystem repos — agentic coding setup." style="border-left:4px solid #0369a1">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5408" target="_blank" style="color:#0369a1">#5408</a>
+    <span class="issue-title">[Spike]Add `AGENTS.md` (with `CLAUDE.md` symlink) to all Kedro ecosystem Repositories</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Add AGENTS.md/CLAUDE.md to Kedro ecosystem repos — agentic coding setup.</span></div>
+</div><div class="issue-card" data-search="exploring “skills” in kedro #5461 exploring &#x27;skills&#x27; in kedro — kedro-skills concept/design." style="border-left:4px solid #0369a1">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5461" target="_blank" style="color:#0369a1">#5461</a>
+    <span class="issue-title">Exploring “Skills” in Kedro</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Exploring &#x27;Skills&#x27; in Kedro — kedro-skills concept/design.</span></div>
+</div><div class="issue-card" data-search="create a `kedro-skills` plugin #5525 create a kedro-skills plugin — agentic skills plugin implementation." style="border-left:4px solid #0369a1">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5525" target="_blank" style="color:#0369a1">#5525</a>
+    <span class="issue-title">Create a `kedro-skills` plugin</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Create a kedro-skills plugin — agentic skills plugin implementation.</span></div>
+</div></div>
+</div></div>
+</section><section id="epic_deploy" class="theme-section">
+  <div class="theme-header" style="border-left:6px solid #c2410c; background:#fff7ed">
+    <div class="theme-header-top">
+      <span class="theme-icon">☁️</span>
+      <div>
+        <div class="theme-title-row">
+          <h2 class="theme-title">Deployment</h2>
+          <span class="theme-count-badge" style="background:#c2410c">6 issues</span>
+          <span class="theme-meta-pill" style="background:#f1f5f9;color:#94a3b8;border:1px solid #e2e8f0">flat issues</span>
+        </div>
+        <p class="theme-desc">Running Kedro in production — cloud platforms, Dask, Ray, MLRun, universal deployment, and embedding pipelines in third-party apps.</p>
+      </div>
+    </div>
+  </div>
+  <div class="theme-body"><div class="epic-block flat-epic" style="border-top:3px solid #94a3b8">
+  <div class="epic-header-bar" style="background:#f8fafc">
+    <div class="epic-header-left">
+      <span class="epic-pill" style="background:#94a3b8">ISSUES</span>
+      <span class="epic-name" style="color:#64748b">Independent issues — no epic grouping</span>
+    </div>
+    <span class="epic-issue-count" style="color:#94a3b8">6 issues</span>
+  </div>
+  <div class="issues-grid"><div class="issue-card" data-search="investigate how users can use ray with kedro  #479 investigates ray distributed as an execution engine — a deployment/runner integration question." style="border-left:4px solid #c2410c">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/479" target="_blank" style="color:#c2410c">#479</a>
+    <span class="issue-title">Investigate how users can use Ray with Kedro </span>
+  </div>
+  <div class="chips"><span class="chip">Component: Documentation 📄</span></div>
+  <div class="reason"><span>💡</span><span>Investigates Ray Distributed as an execution engine — a deployment/runner integration question.</span></div>
+</div><div class="issue-card" data-search="refactor dask deployment documentation to use public methods #3309 refactor dask deployment docs to use public methods — deployment documentation." style="border-left:4px solid #c2410c">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3309" target="_blank" style="color:#c2410c">#3309</a>
+    <span class="issue-title">Refactor dask deployment documentation to use public methods</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Refactor Dask deployment docs to use public methods — deployment documentation.</span></div>
+</div><div class="issue-card" data-search="universal kedro deployment (part 4) - embedding kedro pipelines in third-party applications  #3540 universal kedro deployment part 4: embedding pipelines in third-party apps." style="border-left:4px solid #c2410c">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3540" target="_blank" style="color:#c2410c">#3540</a>
+    <span class="issue-title">Universal Kedro Deployment (Part 4) - Embedding kedro pipelines in third-party applications </span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>Universal Kedro Deployment Part 4: embedding pipelines in third-party apps.</span></div>
+</div><div class="issue-card" data-search="add a deployment mode to skip non-essential validation checks during kedro run #4671 skip non-essential validation checks in deployment mode — deployment runtime flag." style="border-left:4px solid #c2410c">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/4671" target="_blank" style="color:#c2410c">#4671</a>
+    <span class="issue-title">Add a deployment mode to skip non-essential validation checks during kedro run</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Skip non-essential validation checks in deployment mode — deployment runtime flag.</span></div>
+</div><div class="issue-card" data-search="dask documentation for local runs #5220 dask documentation for local runs — deployment docs gap." style="border-left:4px solid #c2410c">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5220" target="_blank" style="color:#c2410c">#5220</a>
+    <span class="issue-title">dask documentation for local runs</span>
+  </div>
+  <div class="chips"><span class="chip">Component: Documentation 📄</span><span class="chip">Help Wanted :pray:</span></div>
+  <div class="reason"><span>💡</span><span>Dask documentation for local runs — deployment docs gap.</span></div>
+</div><div class="issue-card" data-search="kedro x mlrun #5305 kedro x mlrun integration — deployment platform integration." style="border-left:4px solid #c2410c">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5305" target="_blank" style="color:#c2410c">#5305</a>
+    <span class="issue-title">Kedro x MLRun</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>Kedro x MLRun integration — deployment platform integration.</span></div>
+</div></div>
+</div></div>
+</section><section id="epic_observability" class="theme-section">
+  <div class="theme-header" style="border-left:6px solid #6d28d9; background:#f5f3ff">
+    <div class="theme-header-top">
+      <span class="theme-icon">📊</span>
+      <div>
+        <div class="theme-title-row">
+          <h2 class="theme-title">Logging, Observability &amp; Quality</h2>
+          <span class="theme-count-badge" style="background:#6d28d9">9 issues</span>
+          <span class="theme-meta-pill" style="background:#6d28d920;color:#6d28d9;border:1px solid #6d28d940">2 epics</span>
+        </div>
+        <p class="theme-desc">Logging configuration, OpenTelemetry tracing, Logfire integration, testing tooling, benchmarks, and security review automation.</p>
+      </div>
+    </div>
+  </div>
+  <div class="theme-body"><div class="epic-block" style="border-top:3px solid #6d28d9">
+  <div class="epic-header-bar" style="background:#f5f3ff">
+    <div class="epic-header-left">
+      <span class="epic-pill" style="background:#6d28d9">EPIC 1 of 2</span>
+      <span class="epic-name">Logging &amp; Observability</span>
+    </div>
+    <span class="epic-issue-count" style="color:#6d28d9">5 issues</span>
+  </div>
+  <p class="epic-desc-text">Default logging config, Logfire, OpenTelemetry tracing, better error messages, and logging.yml bug fixes.</p>
+  <div class="issues-grid"><div class="issue-card" data-search="better error logging #3651 requests better error logging throughout kedro — logging quality." style="border-left:4px solid #6d28d9">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3651" target="_blank" style="color:#6d28d9">#3651</a>
+    <span class="issue-title">Better Error Logging</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Requests better error logging throughout Kedro — logging quality.</span></div>
+</div><div class="issue-card" data-search="change the `default_logging.yml` and `logging.yml` to have more sensible default #3687 change default_logging.yml to have more sensible defaults — logging configuration." style="border-left:4px solid #6d28d9">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3687" target="_blank" style="color:#6d28d9">#3687</a>
+    <span class="issue-title">Change the `default_logging.yml` and `logging.yml` to have more sensible default</span>
+  </div>
+  <div class="chips"><span class="chip">Component: Logging</span></div>
+  <div class="reason"><span>💡</span><span>Change default_logging.yml to have more sensible defaults — logging configuration.</span></div>
+</div><div class="issue-card" data-search="document how to properly use logfire in kedro #3978 document how to use logfire with kedro — observability tooling docs." style="border-left:4px solid #6d28d9">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3978" target="_blank" style="color:#6d28d9">#3978</a>
+    <span class="issue-title">Document how to properly use Logfire in Kedro</span>
+  </div>
+  <div class="chips"><span class="chip">Component: Documentation 📄</span><span class="chip">Component: Logging</span></div>
+  <div class="reason"><span>💡</span><span>Document how to use Logfire with Kedro — observability tooling docs.</span></div>
+</div><div class="issue-card" data-search="tracing with opentelemetry #5307 tracing with opentelemetry — distributed tracing / observability feature." style="border-left:4px solid #6d28d9">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5307" target="_blank" style="color:#6d28d9">#5307</a>
+    <span class="issue-title">Tracing with OpenTelemetry</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>Tracing with OpenTelemetry — distributed tracing / observability feature.</span></div>
+</div><div class="issue-card" data-search="custom logging filter subclasses can&#x27;t be configured via `logging.yml` #5619 custom logging filter subclasses can&#x27;t be configured via logging.yml — logging config bug." style="border-left:4px solid #6d28d9">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5619" target="_blank" style="color:#6d28d9">#5619</a>
+    <span class="issue-title">Custom logging Filter subclasses can&#x27;t be configured via `logging.yml`</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Bug Report 🐞</span></div>
+  <div class="reason"><span>💡</span><span>Custom logging Filter subclasses can&#x27;t be configured via logging.yml — logging config bug.</span></div>
+</div></div>
+</div><div class="epic-block" style="border-top:3px solid #6d28d9">
+  <div class="epic-header-bar" style="background:#f5f3ff">
+    <div class="epic-header-left">
+      <span class="epic-pill" style="background:#6d28d9">EPIC 2 of 2</span>
+      <span class="epic-name">Testing &amp; Quality</span>
+    </div>
+    <span class="epic-issue-count" style="color:#6d28d9">4 issues</span>
+  </div>
+  <p class="epic-desc-text">Unit test tooling for pipelines, benchmark infrastructure, parameter validation tests, and security review automation.</p>
+  <div class="issues-grid"><div class="issue-card" data-search="add tool to author unit tests for kedro pipelines #4168 add a tool to author unit tests for kedro pipelines — testing tooling feature." style="border-left:4px solid #6d28d9">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/4168" target="_blank" style="color:#6d28d9">#4168</a>
+    <span class="issue-title">Add tool to author unit tests for Kedro pipelines</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Add a tool to author unit tests for Kedro pipelines — testing tooling feature.</span></div>
+</div><div class="issue-card" data-search="explore: integrating metrics dashboards into vizro #5122 integrating metrics dashboards into vizro — quality/observability tooling." style="border-left:4px solid #6d28d9">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5122" target="_blank" style="color:#6d28d9">#5122</a>
+    <span class="issue-title">Explore: Integrating Metrics Dashboards into Vizro</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Integrating metrics dashboards into Vizro — quality/observability tooling.</span></div>
+</div><div class="issue-card" data-search="tests for parameter validation framework #5314 tests for parameter validation framework — test coverage for config validation." style="border-left:4px solid #6d28d9">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5314" target="_blank" style="color:#6d28d9">#5314</a>
+    <span class="issue-title">Tests for parameter validation framework</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Tests for parameter validation framework — test coverage for config validation.</span></div>
+</div><div class="issue-card" data-search="security review skill: flag #nosec / # nosemgrep suppression comments #5631 security review skill to flag #nosec suppression comments — code quality/security tooling." style="border-left:4px solid #6d28d9">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5631" target="_blank" style="color:#6d28d9">#5631</a>
+    <span class="issue-title">Security review skill: flag #nosec / # nosemgrep suppression comments</span>
+  </div>
+  <div class="chips"><span class="chip">Issue: Feature Request</span></div>
+  <div class="reason"><span>💡</span><span>Security review skill to flag #nosec suppression comments — code quality/security tooling.</span></div>
+</div></div>
+</div></div>
+</section><section id="epic_devops" class="theme-section">
+  <div class="theme-header" style="border-left:6px solid #475569; background:#f8fafc">
+    <div class="theme-header-top">
+      <span class="theme-icon">🛠️</span>
+      <div>
+        <div class="theme-title-row">
+          <h2 class="theme-title">DevOps &amp; Community</h2>
+          <span class="theme-count-badge" style="background:#475569">5 issues</span>
+          <span class="theme-meta-pill" style="background:#f1f5f9;color:#94a3b8;border:1px solid #e2e8f0">flat issues</span>
+        </div>
+        <p class="theme-desc">Release automation, pre-commit hygiene, CI/CD organisation, contribution guidelines, and community blog management.</p>
+      </div>
+    </div>
+  </div>
+  <div class="theme-body"><div class="epic-block flat-epic" style="border-top:3px solid #94a3b8">
+  <div class="epic-header-bar" style="background:#f8fafc">
+    <div class="epic-header-left">
+      <span class="epic-pill" style="background:#94a3b8">ISSUES</span>
+      <span class="epic-name" style="color:#64748b">Independent issues — no epic grouping</span>
+    </div>
+    <span class="epic-issue-count" style="color:#94a3b8">5 issues</span>
+  </div>
+  <div class="issues-grid"><div class="issue-card" data-search="select a tool for automating release notes #3697 select a tool for automating release notes — devops/release process." style="border-left:4px solid #475569">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/3697" target="_blank" style="color:#475569">#3697</a>
+    <span class="issue-title">Select a tool for automating release notes</span>
+  </div>
+  <div class="chips"><span class="chip">Component: DevOps</span></div>
+  <div class="reason"><span>💡</span><span>Select a tool for automating release notes — DevOps/release process.</span></div>
+</div><div class="issue-card" data-search="automate pre-commit updates on a regular basis #4109 automate pre-commit updates regularly — devops automation." style="border-left:4px solid #475569">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/4109" target="_blank" style="color:#475569">#4109</a>
+    <span class="issue-title">Automate pre-commit updates on a regular basis</span>
+  </div>
+  <div class="chips"><span class="chip">Component: DevOps</span></div>
+  <div class="reason"><span>💡</span><span>Automate pre-commit updates regularly — DevOps automation.</span></div>
+</div><div class="issue-card" data-search="[blog] review and classify the blog posts on kedro.org ready for transition #5214 review and classify blog posts on kedro.org — community content management." style="border-left:4px solid #475569">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5214" target="_blank" style="color:#475569">#5214</a>
+    <span class="issue-title">[Blog] Review and classify the blog posts on kedro.org ready for transition</span>
+  </div>
+  <div class="chips"><span class="chip">Community</span></div>
+  <div class="reason"><span>💡</span><span>Review and classify blog posts on kedro.org — community content management.</span></div>
+</div><div class="issue-card" data-search="move tools e2e tests (without pyspark or example pipeline) back to kedro repo #5416 move tools e2e tests back to the kedro repo — devops/ci test organisation." style="border-left:4px solid #475569">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5416" target="_blank" style="color:#475569">#5416</a>
+    <span class="issue-title">Move tools e2e tests (without pyspark or example pipeline) back to Kedro repo</span>
+  </div>
+  <div class="chips"><span class="chip">Component: DevOps</span></div>
+  <div class="reason"><span>💡</span><span>Move tools e2e tests back to the Kedro repo — DevOps/CI test organisation.</span></div>
+</div><div class="issue-card" data-search="revisit and polish contribution guidelines #5639 revisit and polish contribution guidelines — community/contributor experience." style="border-left:4px solid #475569">
+  <div class="card-top">
+    <a class="issue-num" href="https://github.com/kedro-org/kedro/issues/5639" target="_blank" style="color:#475569">#5639</a>
+    <span class="issue-title">Revisit and polish contribution guidelines</span>
+  </div>
+  
+  <div class="reason"><span>💡</span><span>Revisit and polish contribution guidelines — community/contributor experience.</span></div>
+</div></div>
+</div></div>
+</section>
+</main>
+<script>
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('.theme-section');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 90) cur = s.id; });
+  navLinks.forEach(n => n.classList.toggle('active', n.getAttribute('href') === '#' + cur));
+}, {passive:true});
+navLinks.forEach(a => a.addEventListener('click', e => {
+  e.preventDefault();
+  document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth',block:'start'});
+}));
+function filterCards(q) {
+  q = q.trim().toLowerCase();
+  let shown = 0;
+  document.querySelectorAll('.issue-card').forEach(card => {
+    const match = !q || card.dataset.search.includes(q);
+    card.hidden = !match;
+    if (match) shown++;
+  });
+  document.getElementById('srch-info').textContent = q ? `Showing ${shown} of 151 issues matching "${q}"` : '';
+}
+document.querySelectorAll('.issue-card').forEach(card => {
+  card.addEventListener('click', e => {
+    if (e.target.closest('a')) return;
+    window.open(card.querySelector('.issue-num').href, '_blank');
+  });
+});
+</script>
+</body>
+</html>
